@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CQRS | Integração entre sistemas · Dev Atlas</title>
+<script>
+  /* Define o tema antes de pintar a página, para não piscar. Mantenha em toda página. */
+  (function () {
+    var t = null;
+    try { t = localStorage.getItem('devmap-theme'); } catch (e) {}
+    if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    document.documentElement.dataset.theme = t;
+  })();
+</script>
+<link rel="stylesheet" href="../../../../assets/css/design-system.css">
+</head>
+<body data-root="../../../../" data-tab="arquitetura" data-page="integracao-entre-sistemas/coordenacao/cqrs">
+<a class="skip" href="#main">Ir para o conteúdo</a>
+
+<header class="header" id="header" data-shell="header"></header>
+
+<div class="shell">
+  <aside class="side-wrap" id="side" aria-label="Páginas de Arquitetura e Algoritmos" data-shell="side"></aside>
+  <div class="main">
+    <div class="main-row">
+      <main class="article" id="main">
+        <header>
+          <div class="eyebrow">Arquitetura e Algoritmos / Integração entre sistemas / Coordenação e consistência</div>
+          <h1 class="page-title" tabindex="-1">CQRS</h1>
+          <p class="lead">Usa modelos diferentes para escrever (comandos) e para ler (consultas), cada um otimizado para a sua função.</p>
+        </header>
+
+        <div class="prose">
+          <h2 id="simulacao">Simulação</h2>
+          <p>Mexa nos controles e aperte os botões para ver o padrão funcionando, inclusive quando algo dá errado.</p>
+          <div data-sim="cqrs" data-title="CQRS" style="--gc: #9a3f4f"></div>
+
+          <h2 id="como-funciona">Como funciona</h2>
+          <p>Comandos (criar pedido) passam pelas regras de negócio e gravam no modelo de escrita. As mudanças são propagadas (via eventos) para um ou mais modelos de leitura, desnormalizados e prontos para as telas. As consultas só leem. Cada lado escala separadamente. O custo é a consistência eventual: a leitura pode atrasar um instante em relação à escrita.</p>
+
+          <h2 id="passo-a-passo">Passo a passo</h2>
+          <ol>
+            <li>Cliente envia um comando à API de escrita</li>
+            <li>Regras de negócio validam e gravam no banco de escrita</li>
+            <li>Um evento propaga a mudança ao modelo de leitura</li>
+            <li>Consultas são atendidas pelo banco de leitura, já pronto</li>
+          </ol>
+
+          <h2 id="quando-usar">Quando usar</h2>
+          <ul>
+            <li>Leituras rápidas com modelos sob medida</li>
+            <li>Escalar leitura e escrita de forma independente</li>
+            <li>Regras complexas de escrita sem poluir as consultas</li>
+          </ul>
+
+          <h2 id="quando-evitar">Quando evitar</h2>
+          <ul>
+            <li>Aplicações CRUD simples</li>
+            <li>Equipes sem maturidade para lidar com consistência eventual</li>
+            <li>O usuário salva e não vê a mudança na hora: trate isso na interface</li>
+          </ul>
+
+          <h2 id="exemplos">Exemplos</h2>
+          <ul>
+            <li>E-commerce: escrita no banco relacional, catálogo lido do Elasticsearch</li>
+            <li>Dashboards e extratos bancários</li>
+            <li>Sistemas com muito mais leitura que escrita</li>
+          </ul>
+
+          <h2 id="tecnologias">Tecnologias</h2>
+          <p><code>MediatR</code>, <code>Axon</code>, <code>Kafka + Elasticsearch</code>, <code>Redis</code>, <code>MongoDB</code></p>
+        </div>
+
+        <nav class="pager" data-shell="pager" aria-label="Páginas vizinhas"></nav>
+      </main>
+      <aside class="toc" id="toc" data-toc aria-label="Nesta página"></aside>
+    </div>
+    <footer class="site-foot" data-shell="footer"></footer>
+  </div>
+</div>
+
+<div class="scrim"></div>
+<dialog class="search" id="search" data-shell="search" aria-label="Buscar no Dev Atlas"></dialog>
+
+<script src="../../../../assets/js/site.js"></script>
+<script src="../../../../assets/js/shell.js"></script>
+<script src="../../../../assets/js/ds.js"></script>
+<script src="../../../../assets/js/sim.js"></script>
+</body>
+</html>

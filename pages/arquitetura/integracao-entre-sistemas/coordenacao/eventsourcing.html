@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Event sourcing | Integração entre sistemas · Dev Atlas</title>
+<script>
+  /* Define o tema antes de pintar a página, para não piscar. Mantenha em toda página. */
+  (function () {
+    var t = null;
+    try { t = localStorage.getItem('devmap-theme'); } catch (e) {}
+    if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    document.documentElement.dataset.theme = t;
+  })();
+</script>
+<link rel="stylesheet" href="../../../../assets/css/design-system.css">
+</head>
+<body data-root="../../../../" data-tab="arquitetura" data-page="integracao-entre-sistemas/coordenacao/eventsourcing">
+<a class="skip" href="#main">Ir para o conteúdo</a>
+
+<header class="header" id="header" data-shell="header"></header>
+
+<div class="shell">
+  <aside class="side-wrap" id="side" aria-label="Páginas de Arquitetura e Algoritmos" data-shell="side"></aside>
+  <div class="main">
+    <div class="main-row">
+      <main class="article" id="main">
+        <header>
+          <div class="eyebrow">Arquitetura e Algoritmos / Integração entre sistemas / Coordenação e consistência</div>
+          <h1 class="page-title" tabindex="-1">Event sourcing</h1>
+          <p class="lead">Em vez de guardar só o estado atual, guarda-se cada mudança como um evento imutável.</p>
+        </header>
+
+        <div class="prose">
+          <h2 id="simulacao">Simulação</h2>
+          <p>Mexa nos controles e aperte os botões para ver o padrão funcionando, inclusive quando algo dá errado.</p>
+          <div data-sim="eventsourcing" data-title="Event sourcing" style="--gc: #9a3f4f"></div>
+
+          <h2 id="como-funciona">Como funciona</h2>
+          <p>O estado é derivado: para saber o saldo, soma-se todos os depósitos e saques. Eventos só são acrescentados, nunca alterados. Isso dá auditoria completa, “viagem no tempo” (como estava na terça?) e a possibilidade de criar novas visões reprocessando o histórico. Snapshots periódicos evitam reler tudo. É frequentemente combinado com CQRS.</p>
+
+          <h2 id="passo-a-passo">Passo a passo</h2>
+          <ol>
+            <li>Um comando é validado contra o estado atual</li>
+            <li>O resultado vira um evento imutável, acrescentado ao log</li>
+            <li>O estado é reconstruído aplicando os eventos em ordem</li>
+            <li>Projeções e consumidores reagem aos novos eventos</li>
+          </ol>
+
+          <h2 id="quando-usar">Quando usar</h2>
+          <ul>
+            <li>Auditoria e rastreabilidade completas</li>
+            <li>Reconstruir ou corrigir estado reprocessando eventos</li>
+            <li>Novas projeções sem migrar dados</li>
+            <li>Depurar reproduzindo exatamente o que aconteceu</li>
+          </ul>
+
+          <h2 id="quando-evitar">Quando evitar</h2>
+          <ul>
+            <li>Aumenta a complexidade de consulta e de versionar eventos</li>
+            <li>Apagar dados pessoais (LGPD) é difícil com log imutável</li>
+            <li>CRUD simples não precisa disso</li>
+          </ul>
+
+          <h2 id="exemplos">Exemplos</h2>
+          <ul>
+            <li>Contas bancárias e livros contábeis (ledgers)</li>
+            <li>Pedidos em que o histórico importa: quem alterou e quando</li>
+            <li>Controle de versão: o Git é, em essência, um log de mudanças</li>
+          </ul>
+
+          <h2 id="tecnologias">Tecnologias</h2>
+          <p><code>EventStoreDB</code>, <code>Axon</code>, <code>Kafka</code>, <code>Marten</code>, <code>PostgreSQL</code></p>
+        </div>
+
+        <nav class="pager" data-shell="pager" aria-label="Páginas vizinhas"></nav>
+      </main>
+      <aside class="toc" id="toc" data-toc aria-label="Nesta página"></aside>
+    </div>
+    <footer class="site-foot" data-shell="footer"></footer>
+  </div>
+</div>
+
+<div class="scrim"></div>
+<dialog class="search" id="search" data-shell="search" aria-label="Buscar no Dev Atlas"></dialog>
+
+<script src="../../../../assets/js/site.js"></script>
+<script src="../../../../assets/js/shell.js"></script>
+<script src="../../../../assets/js/ds.js"></script>
+<script src="../../../../assets/js/sim.js"></script>
+</body>
+</html>

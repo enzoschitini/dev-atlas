@@ -1,5 +1,5 @@
 /*
- * DevMap — o mapa do site. Fonte única da estrutura.
+ * Dev Atlas — o mapa do site. Fonte única da estrutura.
  *
  * O shell.js lê este arquivo e monta as abas, o menu lateral, a busca e os
  * links de anterior/próxima. Nenhuma página tem navegação escrita à mão.
@@ -35,11 +35,36 @@
  *      data-page é o caminho dentro da aba, sem .html — ex.: estruturais/adapter/explicacao
  */
 window.DEVMAP = {
-  name: 'DevMap',
+  name: 'Dev Atlas',
   sub: 'Estudos',
   tagline: 'Meus estudos de programação, documentados em um só lugar.',
 
   tabs: [
+    {
+      id: 'linguagens',
+      label: 'Linguagens',
+      icon: 'code',
+      summary: 'As linguagens que uso no dia a dia: sintaxe, idiomas e armadilhas.',
+      pages: [
+        {
+          id: 'overview',
+          label: 'Overview',
+          summary: 'As linguagens que uso no dia a dia: sintaxe, idiomas e armadilhas.'
+        },
+        {
+          id: 'python',
+          label: 'Python',
+          summary: 'Sintaxe, idiomas da linguagem e o que costuma dar errado.',
+          empty: true
+        },
+        {
+          id: 'sql',
+          label: 'SQL',
+          summary: 'Consultas, junções, janelas e o que muda de um banco para outro.',
+          empty: true
+        }
+      ]
+    },
     {
       id: 'clean-code',
       label: 'Clean Code',
@@ -486,6 +511,313 @@ window.DEVMAP = {
               ]
             }
           ]
+        }
+      ]
+    },
+    {
+      id: 'frameworks',
+      label: 'Frameworks',
+      icon: 'boxes',
+      summary: 'Frameworks para montar aplicações com IA e agentes.',
+      pages: [
+        {
+          id: 'overview',
+          label: 'Overview',
+          summary: 'Frameworks para montar aplicações com IA e agentes.'
+        },
+        {
+          id: 'langchain',
+          label: 'LangChain',
+          summary: 'Cadeias, agentes, ferramentas e memória para aplicações com LLM.',
+          empty: true
+        },
+        {
+          id: 'agno',
+          label: 'Agno',
+          summary: 'Agentes, times de agentes e ferramentas com o Agno.',
+          empty: true
+        }
+      ]
+    },
+    {
+      id: 'ferramentas',
+      label: 'Ferramentas',
+      icon: 'bolt',
+      summary: 'Serviços e ferramentas externas que entram nos projetos.',
+      pages: [
+        {
+          id: 'overview',
+          label: 'Overview',
+          summary: 'Serviços e ferramentas externas que entram nos projetos.'
+        },
+        {
+          id: 'elevenlabs',
+          label: 'ElevenLabs',
+          summary: 'Voz sintética: vozes, API e como encaixar em um fluxo.',
+          empty: true
+        },
+        {
+          id: 'tableau',
+          label: 'Tableau',
+          summary: 'Painéis e visualização de dados.',
+          empty: true
+        }
+      ]
+    },
+    {
+      id: 'bancos-de-dados',
+      label: 'Bancos de dados',
+      icon: 'layout',
+      summary: 'Onde os dados moram: relacional, documentos, arquivos e vetores.',
+      pages: [
+        {
+          id: 'overview',
+          label: 'Overview',
+          summary: 'Onde os dados moram: relacional, documentos, arquivos e vetores.'
+        },
+        {
+          id: 'postgres',
+          label: 'Postgres',
+          summary: 'Modelagem, índices, consultas e administração.',
+          empty: true
+        },
+        {
+          id: 'mongodb',
+          label: 'MongoDB',
+          summary: 'Documentos, coleções e quando fazem sentido.',
+          empty: true
+        },
+        {
+          id: 's3',
+          label: 'S3',
+          summary: 'Armazenamento de objetos: buckets, permissões e custos.',
+          empty: true
+        },
+        {
+          id: 'supabase',
+          label: 'Supabase',
+          summary: 'Postgres, autenticação e storage como serviço.',
+          empty: true
+        },
+        {
+          id: 'pinecone',
+          label: 'Pinecone',
+          summary: 'Banco vetorial para busca semântica e RAG.',
+          empty: true
+        }
+      ]
+    },
+    {
+      id: 'devops',
+      label: 'DevOps',
+      icon: 'folder',
+      summary: 'Colocar no ar, observar e manter funcionando.',
+      pages: [
+        {
+          id: 'overview',
+          label: 'Overview',
+          summary: 'Colocar no ar, observar e manter funcionando.'
+        },
+        {
+          id: 'servers',
+          label: 'Servers',
+          summary: 'Servidores: configuração, acesso e manutenção.',
+          empty: true
+        },
+        {
+          id: 'metrics',
+          label: 'Metrics',
+          summary: 'O que medir, como coletar e como ler.',
+          empty: true
+        },
+        {
+          id: 'optimization',
+          label: 'Optimization',
+          summary: 'Achar o gargalo e reduzir tempo e custo.',
+          empty: true
+        },
+        {
+          id: 'security',
+          label: 'Security',
+          summary: 'Segredos, acessos e o básico para não ser o elo fraco.',
+          empty: true
+        },
+        {
+          id: 'aws',
+          label: 'AWS',
+          summary: 'Os serviços da AWS que aparecem nos projetos.',
+          empty: true
+        },
+        {
+          id: 'vercel',
+          label: 'Vercel',
+          summary: 'Deploy, domínios, variáveis e logs na Vercel.',
+          empty: true
+        }
+      ]
+    },
+    {
+      id: 'arquitetura',
+      label: 'Arquitetura e Algoritmos',
+      icon: 'list',
+      summary: 'Como os sistemas se conectam e quanto custa cada decisão.',
+      pages: [
+        {
+          id: 'overview',
+          label: 'Overview',
+          summary: 'Como os sistemas se conectam e quanto custa cada decisão.'
+        },
+        {
+          folder: 'integracao-entre-sistemas',
+          label: 'Integração entre sistemas',
+          pages: [
+            { id: 'overview', label: 'Overview', summary: 'Os padrões de comunicação entre sistemas, em seis grupos.' },
+            {
+              folder: 'sincrono',
+              label: 'Síncrono',
+              pages: [
+                { id: 'request-response', label: 'Request-response', summary: 'Um cliente faz uma requisição e espera a resposta do serviço. É a base da web.' },
+                { id: 'grpc', label: 'RPC / gRPC', summary: 'Você chama um método de outro serviço como se fosse uma função local, com contrato definido antes.' },
+                { id: 'graphql', label: 'GraphQL', summary: 'Uma única consulta em que o cliente escolhe exatamente os campos que quer, vindos de vários recursos.' }
+              ]
+            },
+            {
+              folder: 'assincrono',
+              label: 'Assíncrono',
+              pages: [
+                { id: 'fila', label: 'Fila de mensagens', summary: 'O produtor coloca mensagens numa fila e segue; consumidores retiram e processam no seu ritmo.' },
+                { id: 'pubsub', label: 'Pub/Sub', summary: 'Um publicador emite um evento num tópico; todos os assinantes interessados recebem uma cópia.' },
+                { id: 'webhook', label: 'Webhooks', summary: 'Em vez de você perguntar, o serviço externo chama uma URL sua quando algo acontece.' },
+                { id: 'reqreply', label: 'Request-reply assíncrono', summary: 'O pedido vai por uma fila e a resposta volta por outra, ligadas por um identificador de correlação.' }
+              ]
+            },
+            {
+              folder: 'tempo-real',
+              label: 'Tempo real e push',
+              pages: [
+                { id: 'polling', label: 'Polling e long polling', summary: 'O cliente pergunta de tempos em tempos se há novidade (polling) ou o servidor segura a pergunta até ter algo (long polling).' },
+                { id: 'websocket', label: 'WebSocket', summary: 'Uma conexão que fica aberta e permite que cliente e servidor enviem mensagens a qualquer momento.' },
+                { id: 'sse', label: 'Server-Sent Events', summary: 'O navegador abre uma conexão HTTP e o servidor vai enviando eventos por ela, só nesse sentido.' },
+                { id: 'streaming', label: 'Streaming de eventos', summary: 'Eventos fluem continuamente por um log distribuído e vários consumidores leem e processam em tempo real.' },
+                { id: 'mqtt', label: 'MQTT', summary: 'Protocolo pub/sub minimalista, pensado para sensores e dispositivos com pouca banda e energia.' }
+              ]
+            },
+            {
+              folder: 'lote',
+              label: 'Lote e dados',
+              pages: [
+                { id: 'batch', label: 'Batch', summary: 'Os dados se acumulam e um job processa tudo de uma vez, em hora marcada ou quando o lote enche.' },
+                { id: 'cdc', label: 'CDC', summary: 'Captura cada alteração feita no banco (insert, update, delete) e a publica como evento.' }
+              ]
+            },
+            {
+              folder: 'coordenacao',
+              label: 'Coordenação e consistência',
+              pages: [
+                { id: 'saga', label: 'Saga', summary: 'Uma operação que atravessa vários serviços é dividida em passos locais, cada um com uma ação que o desfaz.' },
+                { id: 'outbox', label: 'Outbox', summary: 'O evento é gravado no mesmo banco, na mesma transação do dado; um processo à parte o publica no broker.' },
+                { id: 'eventsourcing', label: 'Event sourcing', summary: 'Em vez de guardar só o estado atual, guarda-se cada mudança como um evento imutável.' },
+                { id: 'cqrs', label: 'CQRS', summary: 'Usa modelos diferentes para escrever (comandos) e para ler (consultas), cada um otimizado para a sua função.' },
+                { id: 'scatter', label: 'Scatter-gather', summary: 'Um pedido é espalhado para vários serviços em paralelo e as respostas são combinadas numa só.' },
+                { id: 'gossip', label: 'Gossip', summary: 'Cada nó conta o que sabe para alguns vizinhos aleatórios, e a informação se espalha como um boato.' }
+              ]
+            },
+            {
+              folder: 'infra',
+              label: 'Infraestrutura de apoio',
+              pages: [
+                { id: 'gateway', label: 'API Gateway', summary: 'Um ponto de entrada que recebe todas as requisições externas e as encaminha ao serviço certo.' },
+                { id: 'mesh', label: 'Service mesh', summary: 'Proxies ao lado de cada serviço cuidam da comunicação interna (segurança, retentativas, métricas) sem mudar o código.' }
+              ]
+            }
+          ]
+        },
+        {
+          id: 'cache',
+          label: 'Cache',
+          summary: 'O que guardar, por quanto tempo e como invalidar.',
+          empty: true
+        },
+        {
+          id: 'big-o',
+          label: 'Big O',
+          summary: 'Complexidade de tempo e espaço, para comparar soluções.',
+          empty: true
+        }
+      ]
+    },
+    {
+      id: 'research',
+      label: 'Research',
+      icon: 'globe',
+      summary: 'Pesquisa: notícias, Claude, projetos e documentações.',
+      pages: [
+        {
+          id: 'overview',
+          label: 'Overview',
+          summary: 'Pesquisa: notícias, Claude, projetos e documentações.'
+        },
+        {
+          id: 'news-blogs',
+          label: 'News/Blogs',
+          summary: 'Notícias e blogs que vale acompanhar.',
+          empty: true
+        },
+        {
+          id: 'claude',
+          label: 'Claude',
+          summary: 'Novidades, recursos e jeitos de usar o Claude.',
+          empty: true
+        },
+        {
+          id: 'projects',
+          label: 'Projects',
+          summary: 'Projetos que estudo ou uso de referência.',
+          empty: true
+        },
+        {
+          id: 'documentations',
+          label: 'Documentations',
+          summary: 'Documentações oficiais que consulto com frequência.',
+          empty: true
+        }
+      ]
+    },
+    {
+      id: 'github',
+      label: 'GitHub',
+      icon: 'edit',
+      summary: 'Fluxo de trabalho no Git e no GitHub.',
+      pages: [
+        {
+          id: 'overview',
+          label: 'Overview',
+          summary: 'Fluxo de trabalho no Git e no GitHub.'
+        },
+        {
+          id: 'commits',
+          label: 'Commits',
+          summary: 'Como escrever commits que contam a história do projeto.',
+          empty: true
+        }
+      ]
+    },
+    {
+      id: 'data-insights',
+      label: 'Data Insights',
+      icon: 'note',
+      summary: 'Transformar dados em decisão.',
+      pages: [
+        {
+          id: 'overview',
+          label: 'Overview',
+          summary: 'Transformar dados em decisão.'
+        },
+        {
+          id: 'crisp',
+          label: 'CRISP',
+          summary: 'O ciclo CRISP-DM para projetos de dados.',
+          empty: true
         }
       ]
     }

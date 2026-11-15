@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GraphQL | Integração entre sistemas · Dev Atlas</title>
+<script>
+  /* Define o tema antes de pintar a página, para não piscar. Mantenha em toda página. */
+  (function () {
+    var t = null;
+    try { t = localStorage.getItem('devmap-theme'); } catch (e) {}
+    if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    document.documentElement.dataset.theme = t;
+  })();
+</script>
+<link rel="stylesheet" href="../../../../assets/css/design-system.css">
+</head>
+<body data-root="../../../../" data-tab="arquitetura" data-page="integracao-entre-sistemas/sincrono/graphql">
+<a class="skip" href="#main">Ir para o conteúdo</a>
+
+<header class="header" id="header" data-shell="header"></header>
+
+<div class="shell">
+  <aside class="side-wrap" id="side" aria-label="Páginas de Arquitetura e Algoritmos" data-shell="side"></aside>
+  <div class="main">
+    <div class="main-row">
+      <main class="article" id="main">
+        <header>
+          <div class="eyebrow">Arquitetura e Algoritmos / Integração entre sistemas / Síncrono</div>
+          <h1 class="page-title" tabindex="-1">GraphQL</h1>
+          <p class="lead">Uma única consulta em que o cliente escolhe exatamente os campos que quer, vindos de vários recursos.</p>
+        </header>
+
+        <div class="prose">
+          <h2 id="simulacao">Simulação</h2>
+          <p>Mexa nos controles e aperte os botões para ver o padrão funcionando, inclusive quando algo dá errado.</p>
+          <div data-sim="graphql" data-title="GraphQL" style="--gc: #2f5d8a"></div>
+
+          <h2 id="como-funciona">Como funciona</h2>
+          <p>O servidor expõe um schema tipado com tudo que existe. O cliente envia uma query descrevendo o formato do que quer receber; o servidor resolve cada campo (muitas vezes chamando outros serviços) e devolve um JSON com exatamente aquela forma. Além de query (ler), há mutation (alterar dados) e subscription (receber atualizações, em geral via WebSocket).</p>
+
+          <h2 id="passo-a-passo">Passo a passo</h2>
+          <ol>
+            <li>Cliente escreve a query com os campos desejados</li>
+            <li>Servidor valida a query contra o schema</li>
+            <li>Resolvers buscam cada campo nos serviços/bancos</li>
+            <li>Servidor monta e devolve um único JSON</li>
+          </ol>
+
+          <h2 id="quando-usar">Quando usar</h2>
+          <ul>
+            <li>Over-fetching (campo demais) e under-fetching (várias chamadas para uma tela)</li>
+            <li>Telas e clientes diferentes (web, mobile) com necessidades diferentes</li>
+            <li>Evoluir a API sem criar novas versões de endpoints</li>
+          </ul>
+
+          <h2 id="quando-evitar">Quando evitar</h2>
+          <ul>
+            <li>Consultas muito aninhadas sem limite derrubam o servidor (use limite de profundidade/custo)</li>
+            <li>Problema N+1 se os resolvers não fizerem batching (DataLoader)</li>
+            <li>Cache HTTP simples é mais difícil que em REST</li>
+          </ul>
+
+          <h2 id="exemplos">Exemplos</h2>
+          <ul>
+            <li>Apps que juntam perfil, pedidos e recomendações numa tela</li>
+            <li>API pública do GitHub (v4)</li>
+            <li>Camada BFF agregando vários microsserviços</li>
+          </ul>
+
+          <h2 id="tecnologias">Tecnologias</h2>
+          <p><code>Apollo</code>, <code>GraphQL Yoga</code>, <code>Hasura</code>, <code>Relay</code></p>
+        </div>
+
+        <nav class="pager" data-shell="pager" aria-label="Páginas vizinhas"></nav>
+      </main>
+      <aside class="toc" id="toc" data-toc aria-label="Nesta página"></aside>
+    </div>
+    <footer class="site-foot" data-shell="footer"></footer>
+  </div>
+</div>
+
+<div class="scrim"></div>
+<dialog class="search" id="search" data-shell="search" aria-label="Buscar no Dev Atlas"></dialog>
+
+<script src="../../../../assets/js/site.js"></script>
+<script src="../../../../assets/js/shell.js"></script>
+<script src="../../../../assets/js/ds.js"></script>
+<script src="../../../../assets/js/sim.js"></script>
+</body>
+</html>

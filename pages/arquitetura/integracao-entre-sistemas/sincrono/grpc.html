@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RPC / gRPC | Integração entre sistemas · Dev Atlas</title>
+<script>
+  /* Define o tema antes de pintar a página, para não piscar. Mantenha em toda página. */
+  (function () {
+    var t = null;
+    try { t = localStorage.getItem('devmap-theme'); } catch (e) {}
+    if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    document.documentElement.dataset.theme = t;
+  })();
+</script>
+<link rel="stylesheet" href="../../../../assets/css/design-system.css">
+</head>
+<body data-root="../../../../" data-tab="arquitetura" data-page="integracao-entre-sistemas/sincrono/grpc">
+<a class="skip" href="#main">Ir para o conteúdo</a>
+
+<header class="header" id="header" data-shell="header"></header>
+
+<div class="shell">
+  <aside class="side-wrap" id="side" aria-label="Páginas de Arquitetura e Algoritmos" data-shell="side"></aside>
+  <div class="main">
+    <div class="main-row">
+      <main class="article" id="main">
+        <header>
+          <div class="eyebrow">Arquitetura e Algoritmos / Integração entre sistemas / Síncrono</div>
+          <h1 class="page-title" tabindex="-1">RPC / gRPC</h1>
+          <p class="lead">Você chama um método de outro serviço como se fosse uma função local, com contrato definido antes.</p>
+        </header>
+
+        <div class="prose">
+          <h2 id="simulacao">Simulação</h2>
+          <p>Mexa nos controles e aperte os botões para ver o padrão funcionando, inclusive quando algo dá errado.</p>
+          <div data-sim="grpc" data-title="RPC / gRPC" style="--gc: #2f5d8a"></div>
+
+          <h2 id="como-funciona">Como funciona</h2>
+          <p>O contrato (serviços, métodos e mensagens) é escrito num arquivo .proto. A partir dele são gerados o código do cliente (stub) e do servidor, em qualquer linguagem suportada. As mensagens viajam em Protobuf, um formato binário compacto, sobre HTTP/2, que permite várias chamadas simultâneas na mesma conexão e streaming nos dois sentidos.</p>
+
+          <h2 id="passo-a-passo">Passo a passo</h2>
+          <ol>
+            <li>Define o contrato no arquivo .proto</li>
+            <li>Gera o código de cliente e servidor</li>
+            <li>Cliente chama o método no stub, como função local</li>
+            <li>Servidor executa e devolve a resposta tipada</li>
+          </ol>
+
+          <h2 id="quando-usar">Quando usar</h2>
+          <ul>
+            <li>Latência e consumo de banda menores que JSON sobre HTTP/1.1</li>
+            <li>Contratos rígidos evitam erros de integração entre equipes</li>
+            <li>Streaming bidirecional nativo</li>
+          </ul>
+
+          <h2 id="quando-evitar">Quando evitar</h2>
+          <ul>
+            <li>APIs públicas consumidas direto por navegadores (precisa de gRPC-Web)</li>
+            <li>Quando é preciso ler o payload “a olho” para depurar, sem ferramentas</li>
+            <li>Equipes sem processo para versionar o .proto</li>
+          </ul>
+
+          <h2 id="exemplos">Exemplos</h2>
+          <ul>
+            <li>Microsserviços internos de grandes empresas (o gRPC nasceu no Google)</li>
+            <li>Serviço de pedidos chamando o serviço de estoque</li>
+            <li>Apps móveis em que o tamanho do payload importa</li>
+          </ul>
+
+          <h2 id="tecnologias">Tecnologias</h2>
+          <p><code>gRPC</code>, <code>Protobuf</code>, <code>Thrift</code>, <code>tRPC</code></p>
+        </div>
+
+        <nav class="pager" data-shell="pager" aria-label="Páginas vizinhas"></nav>
+      </main>
+      <aside class="toc" id="toc" data-toc aria-label="Nesta página"></aside>
+    </div>
+    <footer class="site-foot" data-shell="footer"></footer>
+  </div>
+</div>
+
+<div class="scrim"></div>
+<dialog class="search" id="search" data-shell="search" aria-label="Buscar no Dev Atlas"></dialog>
+
+<script src="../../../../assets/js/site.js"></script>
+<script src="../../../../assets/js/shell.js"></script>
+<script src="../../../../assets/js/ds.js"></script>
+<script src="../../../../assets/js/sim.js"></script>
+</body>
+</html>

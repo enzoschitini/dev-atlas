@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Request-response | Integração entre sistemas · Dev Atlas</title>
+<script>
+  /* Define o tema antes de pintar a página, para não piscar. Mantenha em toda página. */
+  (function () {
+    var t = null;
+    try { t = localStorage.getItem('devmap-theme'); } catch (e) {}
+    if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    document.documentElement.dataset.theme = t;
+  })();
+</script>
+<link rel="stylesheet" href="../../../../assets/css/design-system.css">
+</head>
+<body data-root="../../../../" data-tab="arquitetura" data-page="integracao-entre-sistemas/sincrono/request-response">
+<a class="skip" href="#main">Ir para o conteúdo</a>
+
+<header class="header" id="header" data-shell="header"></header>
+
+<div class="shell">
+  <aside class="side-wrap" id="side" aria-label="Páginas de Arquitetura e Algoritmos" data-shell="side"></aside>
+  <div class="main">
+    <div class="main-row">
+      <main class="article" id="main">
+        <header>
+          <div class="eyebrow">Arquitetura e Algoritmos / Integração entre sistemas / Síncrono</div>
+          <h1 class="page-title" tabindex="-1">Request-response</h1>
+          <p class="lead">Um cliente faz uma requisição e espera a resposta do serviço. É a base da web.</p>
+        </header>
+
+        <div class="prose">
+          <h2 id="simulacao">Simulação</h2>
+          <p>Mexa nos controles e aperte os botões para ver o padrão funcionando, inclusive quando algo dá errado.</p>
+          <div data-sim="request-response" data-title="Request-response" style="--gc: #2f5d8a"></div>
+
+          <h2 id="como-funciona">Como funciona</h2>
+          <p>O cliente envia uma requisição (método, endereço, cabeçalhos e corpo) e aguarda. O serviço processa e devolve um status (200, 404, 500…) com o resultado. REST organiza isso em torno de recursos (/pedidos/42) e verbos HTTP (GET, POST, PUT, DELETE). Cada requisição é independente: o servidor não precisa lembrar das anteriores (stateless).</p>
+
+          <h2 id="passo-a-passo">Passo a passo</h2>
+          <ol>
+            <li>Cliente envia a requisição</li>
+            <li>Serviço valida, processa e consulta o que precisar</li>
+            <li>Serviço devolve status + corpo da resposta</li>
+            <li>Cliente usa o resultado e segue o fluxo</li>
+          </ol>
+
+          <h2 id="quando-usar">Quando usar</h2>
+          <ul>
+            <li>Consultas em que o usuário precisa do resultado agora</li>
+            <li>Operações de cadastro e edição (CRUD) entre front-end e back-end</li>
+            <li>Integração padrão entre sistemas, com suporte em qualquer linguagem</li>
+          </ul>
+
+          <h2 id="quando-evitar">Quando evitar</h2>
+          <ul>
+            <li>Tarefas longas (minutos): a conexão estoura o timeout</li>
+            <li>Cadeias longas de chamadas: a latência soma e uma falha derruba todas</li>
+            <li>Avisar muitos interessados de um mesmo fato</li>
+          </ul>
+
+          <h2 id="exemplos">Exemplos</h2>
+          <ul>
+            <li>App de banco consultando o saldo</li>
+            <li>Front-end de e-commerce buscando a lista de produtos</li>
+            <li>Checkout chamando a API de frete para calcular o preço</li>
+          </ul>
+
+          <h2 id="tecnologias">Tecnologias</h2>
+          <p><code>HTTP</code>, <code>REST</code>, <code>OpenAPI</code>, <code>Express</code>, <code>Spring</code>, <code>FastAPI</code></p>
+        </div>
+
+        <nav class="pager" data-shell="pager" aria-label="Páginas vizinhas"></nav>
+      </main>
+      <aside class="toc" id="toc" data-toc aria-label="Nesta página"></aside>
+    </div>
+    <footer class="site-foot" data-shell="footer"></footer>
+  </div>
+</div>
+
+<div class="scrim"></div>
+<dialog class="search" id="search" data-shell="search" aria-label="Buscar no Dev Atlas"></dialog>
+
+<script src="../../../../assets/js/site.js"></script>
+<script src="../../../../assets/js/shell.js"></script>
+<script src="../../../../assets/js/ds.js"></script>
+<script src="../../../../assets/js/sim.js"></script>
+</body>
+</html>

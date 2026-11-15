@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Outbox | Integração entre sistemas · Dev Atlas</title>
+<script>
+  /* Define o tema antes de pintar a página, para não piscar. Mantenha em toda página. */
+  (function () {
+    var t = null;
+    try { t = localStorage.getItem('devmap-theme'); } catch (e) {}
+    if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    document.documentElement.dataset.theme = t;
+  })();
+</script>
+<link rel="stylesheet" href="../../../../assets/css/design-system.css">
+</head>
+<body data-root="../../../../" data-tab="arquitetura" data-page="integracao-entre-sistemas/coordenacao/outbox">
+<a class="skip" href="#main">Ir para o conteúdo</a>
+
+<header class="header" id="header" data-shell="header"></header>
+
+<div class="shell">
+  <aside class="side-wrap" id="side" aria-label="Páginas de Arquitetura e Algoritmos" data-shell="side"></aside>
+  <div class="main">
+    <div class="main-row">
+      <main class="article" id="main">
+        <header>
+          <div class="eyebrow">Arquitetura e Algoritmos / Integração entre sistemas / Coordenação e consistência</div>
+          <h1 class="page-title" tabindex="-1">Outbox</h1>
+          <p class="lead">O evento é gravado no mesmo banco, na mesma transação do dado; um processo à parte o publica no broker.</p>
+        </header>
+
+        <div class="prose">
+          <h2 id="simulacao">Simulação</h2>
+          <p>Mexa nos controles e aperte os botões para ver o padrão funcionando, inclusive quando algo dá errado.</p>
+          <div data-sim="outbox" data-title="Outbox" style="--gc: #9a3f4f"></div>
+
+          <h2 id="como-funciona">Como funciona</h2>
+          <p>O problema: salvar no banco e publicar no broker são duas operações, e se uma falhar os dois ficam inconsistentes. A solução: dentro da mesma transação, grave o dado de negócio e uma linha numa tabela outbox. Um relay (ou CDC) lê a outbox e publica no broker, marcando como enviado. A garantia é “ao menos uma vez”, então os consumidores devem tratar duplicatas.</p>
+
+          <h2 id="passo-a-passo">Passo a passo</h2>
+          <ol>
+            <li>Numa só transação: grava o pedido e o evento na outbox</li>
+            <li>O relay lê as linhas pendentes da outbox</li>
+            <li>Publica o evento no broker</li>
+            <li>Marca a linha como enviada (ou a remove)</li>
+          </ol>
+
+          <h2 id="quando-usar">Quando usar</h2>
+          <ul>
+            <li>Dupla escrita atômica entre banco e broker</li>
+            <li>Eventos não se perdem se o broker estiver fora do ar</li>
+            <li>Ordem preservada por agregado</li>
+          </ul>
+
+          <h2 id="quando-evitar">Quando evitar</h2>
+          <ul>
+            <li>Sem limpeza, a tabela outbox cresce sem parar</li>
+            <li>Latência extra (polling ou CDC) até o evento ser publicado</li>
+            <li>Se nada além do banco precisa ser notificado, é complexidade desnecessária</li>
+          </ul>
+
+          <h2 id="exemplos">Exemplos</h2>
+          <ul>
+            <li>Serviço de pedidos que precisa garantir a publicação de “pedido.criado”</li>
+            <li>Sistemas financeiros em que perder um evento é perder dinheiro</li>
+            <li>Qualquer microsserviço que publica eventos de domínio</li>
+          </ul>
+
+          <h2 id="tecnologias">Tecnologias</h2>
+          <p><code>Debezium Outbox</code>, <code>MassTransit Outbox</code>, <code>Spring Modulith</code>, <code>Axon</code>, <code>Watermill</code></p>
+        </div>
+
+        <nav class="pager" data-shell="pager" aria-label="Páginas vizinhas"></nav>
+      </main>
+      <aside class="toc" id="toc" data-toc aria-label="Nesta página"></aside>
+    </div>
+    <footer class="site-foot" data-shell="footer"></footer>
+  </div>
+</div>
+
+<div class="scrim"></div>
+<dialog class="search" id="search" data-shell="search" aria-label="Buscar no Dev Atlas"></dialog>
+
+<script src="../../../../assets/js/site.js"></script>
+<script src="../../../../assets/js/shell.js"></script>
+<script src="../../../../assets/js/ds.js"></script>
+<script src="../../../../assets/js/sim.js"></script>
+</body>
+</html>

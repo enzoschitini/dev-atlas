@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Saga | Integração entre sistemas · Dev Atlas</title>
+<script>
+  /* Define o tema antes de pintar a página, para não piscar. Mantenha em toda página. */
+  (function () {
+    var t = null;
+    try { t = localStorage.getItem('devmap-theme'); } catch (e) {}
+    if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    document.documentElement.dataset.theme = t;
+  })();
+</script>
+<link rel="stylesheet" href="../../../../assets/css/design-system.css">
+</head>
+<body data-root="../../../../" data-tab="arquitetura" data-page="integracao-entre-sistemas/coordenacao/saga">
+<a class="skip" href="#main">Ir para o conteúdo</a>
+
+<header class="header" id="header" data-shell="header"></header>
+
+<div class="shell">
+  <aside class="side-wrap" id="side" aria-label="Páginas de Arquitetura e Algoritmos" data-shell="side"></aside>
+  <div class="main">
+    <div class="main-row">
+      <main class="article" id="main">
+        <header>
+          <div class="eyebrow">Arquitetura e Algoritmos / Integração entre sistemas / Coordenação e consistência</div>
+          <h1 class="page-title" tabindex="-1">Saga</h1>
+          <p class="lead">Uma operação que atravessa vários serviços é dividida em passos locais, cada um com uma ação que o desfaz.</p>
+        </header>
+
+        <div class="prose">
+          <h2 id="simulacao">Simulação</h2>
+          <p>Mexa nos controles e aperte os botões para ver o padrão funcionando, inclusive quando algo dá errado.</p>
+          <div data-sim="saga" data-title="Saga" style="--gc: #9a3f4f"></div>
+
+          <h2 id="como-funciona">Como funciona</h2>
+          <p>Sem transação distribuída, cada serviço executa a sua parte local e avisa o próximo. Se um passo falha, executam-se as ações de compensação dos passos anteriores (estornar o pagamento, liberar o estoque), em ordem inversa. Existem duas formas: coreografia (cada serviço reage a eventos dos outros, sem chefe) e orquestração (um coordenador central diz quem faz o quê). O resultado final é consistente, mas só eventualmente.</p>
+
+          <h2 id="passo-a-passo">Passo a passo</h2>
+          <ol>
+            <li>Cada serviço executa o seu passo local</li>
+            <li>Ao terminar, avisa o próximo (evento ou comando)</li>
+            <li>Se um passo falhar, dispara as compensações dos anteriores</li>
+            <li>O fluxo termina concluído ou desfeito, nunca “pela metade”</li>
+          </ol>
+
+          <h2 id="quando-usar">Quando usar</h2>
+          <ul>
+            <li>Consistência entre bancos de serviços diferentes sem two-phase commit</li>
+            <li>Fluxos longos que podem falhar no meio</li>
+            <li>Visibilidade e controle do que foi feito e desfeito</li>
+          </ul>
+
+          <h2 id="quando-evitar">Quando evitar</h2>
+          <ul>
+            <li>Quando tudo está num único banco: use transação normal</li>
+            <li>Compensações nem sempre são perfeitas (um e-mail enviado não se desfaz)</li>
+            <li>Estados intermediários ficam visíveis (pedido “pendente”); exige idempotência e monitoramento</li>
+          </ul>
+
+          <h2 id="exemplos">Exemplos</h2>
+          <ul>
+            <li>Compra online: pedido → pagamento → estoque → entrega</li>
+            <li>Reserva de viagem: voo, hotel e carro (se o hotel falha, cancela o voo)</li>
+            <li>Abertura de conta com várias verificações</li>
+          </ul>
+
+          <h2 id="tecnologias">Tecnologias</h2>
+          <p><code>Temporal</code>, <code>Camunda</code>, <code>AWS Step Functions</code>, <code>MassTransit</code>, <code>Axon</code>, <code>Conductor</code></p>
+        </div>
+
+        <nav class="pager" data-shell="pager" aria-label="Páginas vizinhas"></nav>
+      </main>
+      <aside class="toc" id="toc" data-toc aria-label="Nesta página"></aside>
+    </div>
+    <footer class="site-foot" data-shell="footer"></footer>
+  </div>
+</div>
+
+<div class="scrim"></div>
+<dialog class="search" id="search" data-shell="search" aria-label="Buscar no Dev Atlas"></dialog>
+
+<script src="../../../../assets/js/site.js"></script>
+<script src="../../../../assets/js/shell.js"></script>
+<script src="../../../../assets/js/ds.js"></script>
+<script src="../../../../assets/js/sim.js"></script>
+</body>
+</html>

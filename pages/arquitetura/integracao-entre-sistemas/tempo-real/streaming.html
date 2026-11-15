@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Streaming de eventos | Integração entre sistemas · Dev Atlas</title>
+<script>
+  /* Define o tema antes de pintar a página, para não piscar. Mantenha em toda página. */
+  (function () {
+    var t = null;
+    try { t = localStorage.getItem('devmap-theme'); } catch (e) {}
+    if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    document.documentElement.dataset.theme = t;
+  })();
+</script>
+<link rel="stylesheet" href="../../../../assets/css/design-system.css">
+</head>
+<body data-root="../../../../" data-tab="arquitetura" data-page="integracao-entre-sistemas/tempo-real/streaming">
+<a class="skip" href="#main">Ir para o conteúdo</a>
+
+<header class="header" id="header" data-shell="header"></header>
+
+<div class="shell">
+  <aside class="side-wrap" id="side" aria-label="Páginas de Arquitetura e Algoritmos" data-shell="side"></aside>
+  <div class="main">
+    <div class="main-row">
+      <main class="article" id="main">
+        <header>
+          <div class="eyebrow">Arquitetura e Algoritmos / Integração entre sistemas / Tempo real e push</div>
+          <h1 class="page-title" tabindex="-1">Streaming de eventos</h1>
+          <p class="lead">Eventos fluem continuamente por um log distribuído e vários consumidores leem e processam em tempo real.</p>
+        </header>
+
+        <div class="prose">
+          <h2 id="simulacao">Simulação</h2>
+          <p>Mexa nos controles e aperte os botões para ver o padrão funcionando, inclusive quando algo dá errado.</p>
+          <div data-sim="streaming" data-title="Streaming de eventos" style="--gc: #2f8a5d"></div>
+
+          <h2 id="como-funciona">Como funciona</h2>
+          <p>O produtor acrescenta eventos ao fim de um log particionado e persistente (ex.: um tópico do Kafka). Diferente da fila, a mensagem não some ao ser lida: fica retida por um período e cada grupo de consumidores guarda a sua posição (offset). Eventos com a mesma chave vão para a mesma partição, preservando a ordem; mais partições, mais paralelismo. Voltar o offset permite reprocessar o histórico.</p>
+
+          <h2 id="passo-a-passo">Passo a passo</h2>
+          <ol>
+            <li>Produtor anexa o evento ao fim de uma partição (escolhida pela chave)</li>
+            <li>O log guarda o evento por um período de retenção</li>
+            <li>Cada grupo de consumo lê a partir do seu offset</li>
+            <li>Quem quiser reprocessar volta o offset e lê de novo</li>
+          </ol>
+
+          <h2 id="quando-usar">Quando usar</h2>
+          <ul>
+            <li>Alto volume de eventos com baixa latência</li>
+            <li>Vários consumidores independentes lendo o mesmo fluxo</li>
+            <li>Reprocessar histórico e reconstruir estados</li>
+            <li>Ordem garantida por chave</li>
+          </ul>
+
+          <h2 id="quando-evitar">Quando evitar</h2>
+          <ul>
+            <li>Volume pequeno: o Kafka é pesado de operar para poucos eventos</li>
+            <li>Não existe ordem global, só por partição</li>
+            <li>Exige planejar partições, retenção e schemas dos eventos</li>
+          </ul>
+
+          <h2 id="exemplos">Exemplos</h2>
+          <ul>
+            <li>Telemetria de apps e detecção de fraude em cartões em tempo real</li>
+            <li>Rastreamento de entregas e veículos (posições GPS contínuas)</li>
+            <li>Pipelines de dados: cliques do site alimentando analytics e recomendações</li>
+          </ul>
+
+          <h2 id="tecnologias">Tecnologias</h2>
+          <p><code>Apache Kafka</code>, <code>Redpanda</code>, <code>Amazon Kinesis</code>, <code>Apache Pulsar</code>, <code>Flink</code>, <code>Kafka Streams</code></p>
+        </div>
+
+        <nav class="pager" data-shell="pager" aria-label="Páginas vizinhas"></nav>
+      </main>
+      <aside class="toc" id="toc" data-toc aria-label="Nesta página"></aside>
+    </div>
+    <footer class="site-foot" data-shell="footer"></footer>
+  </div>
+</div>
+
+<div class="scrim"></div>
+<dialog class="search" id="search" data-shell="search" aria-label="Buscar no Dev Atlas"></dialog>
+
+<script src="../../../../assets/js/site.js"></script>
+<script src="../../../../assets/js/shell.js"></script>
+<script src="../../../../assets/js/ds.js"></script>
+<script src="../../../../assets/js/sim.js"></script>
+</body>
+</html>

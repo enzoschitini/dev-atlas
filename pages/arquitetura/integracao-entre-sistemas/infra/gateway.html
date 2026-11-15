@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>API Gateway | Integração entre sistemas · Dev Atlas</title>
+<script>
+  /* Define o tema antes de pintar a página, para não piscar. Mantenha em toda página. */
+  (function () {
+    var t = null;
+    try { t = localStorage.getItem('devmap-theme'); } catch (e) {}
+    if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    document.documentElement.dataset.theme = t;
+  })();
+</script>
+<link rel="stylesheet" href="../../../../assets/css/design-system.css">
+</head>
+<body data-root="../../../../" data-tab="arquitetura" data-page="integracao-entre-sistemas/infra/gateway">
+<a class="skip" href="#main">Ir para o conteúdo</a>
+
+<header class="header" id="header" data-shell="header"></header>
+
+<div class="shell">
+  <aside class="side-wrap" id="side" aria-label="Páginas de Arquitetura e Algoritmos" data-shell="side"></aside>
+  <div class="main">
+    <div class="main-row">
+      <main class="article" id="main">
+        <header>
+          <div class="eyebrow">Arquitetura e Algoritmos / Integração entre sistemas / Infraestrutura de apoio</div>
+          <h1 class="page-title" tabindex="-1">API Gateway</h1>
+          <p class="lead">Um ponto de entrada que recebe todas as requisições externas e as encaminha ao serviço certo.</p>
+        </header>
+
+        <div class="prose">
+          <h2 id="simulacao">Simulação</h2>
+          <p>Mexa nos controles e aperte os botões para ver o padrão funcionando, inclusive quando algo dá errado.</p>
+          <div data-sim="gateway" data-title="API Gateway" style="--gc: #4d5560"></div>
+
+          <h2 id="como-funciona">Como funciona</h2>
+          <p>Os clientes falam só com o gateway, que cuida das preocupações transversais: autenticação, limite de requisições (rate limiting), roteamento, cache, logs e até agregação de respostas. Os serviços internos ficam escondidos e podem mudar sem afetar os clientes. Uma variante é o BFF (Backend for Frontend): um gateway por tipo de cliente, como web e mobile.</p>
+
+          <h2 id="passo-a-passo">Passo a passo</h2>
+          <ol>
+            <li>O cliente chama o gateway</li>
+            <li>O gateway autentica e aplica os limites</li>
+            <li>Roteia para o serviço interno correto</li>
+            <li>Devolve a resposta (às vezes agregando várias)</li>
+          </ol>
+
+          <h2 id="quando-usar">Quando usar</h2>
+          <ul>
+            <li>Segurança e políticas aplicadas em um só lugar</li>
+            <li>Clientes simples, sem conhecer a topologia interna</li>
+            <li>Controle de tráfego e observabilidade na borda</li>
+          </ul>
+
+          <h2 id="quando-evitar">Quando evitar</h2>
+          <ul>
+            <li>Vira gargalo e ponto único de falha se mal dimensionado</li>
+            <li>Não coloque lógica de negócio nele</li>
+            <li>Adiciona um salto na rede (latência)</li>
+          </ul>
+
+          <h2 id="exemplos">Exemplos</h2>
+          <ul>
+            <li>Apps móveis acessando dezenas de microsserviços por uma só URL</li>
+            <li>APIs públicas com chaves de acesso e planos de uso</li>
+            <li>Migração gradual de monólito para microsserviços</li>
+          </ul>
+
+          <h2 id="tecnologias">Tecnologias</h2>
+          <p><code>Kong</code>, <code>NGINX</code>, <code>AWS API Gateway</code>, <code>Apigee</code>, <code>Traefik</code>, <code>Envoy</code></p>
+        </div>
+
+        <nav class="pager" data-shell="pager" aria-label="Páginas vizinhas"></nav>
+      </main>
+      <aside class="toc" id="toc" data-toc aria-label="Nesta página"></aside>
+    </div>
+    <footer class="site-foot" data-shell="footer"></footer>
+  </div>
+</div>
+
+<div class="scrim"></div>
+<dialog class="search" id="search" data-shell="search" aria-label="Buscar no Dev Atlas"></dialog>
+
+<script src="../../../../assets/js/site.js"></script>
+<script src="../../../../assets/js/shell.js"></script>
+<script src="../../../../assets/js/ds.js"></script>
+<script src="../../../../assets/js/sim.js"></script>
+</body>
+</html>

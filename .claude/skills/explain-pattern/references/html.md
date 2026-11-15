@@ -24,7 +24,7 @@ Troque `<PATTERN>` (o rótulo, como `Facade`), `<GRUPO>` (a pasta, como `estrutu
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Explicação | <PATTERN> · DevMap</title>
+<title>Explicação | <PATTERN> · Dev Atlas</title>
 <script>
   /* Define o tema antes de pintar a página, para não piscar. Mantenha em toda página. */
   (function () {
@@ -65,7 +65,7 @@ Troque `<PATTERN>` (o rótulo, como `Facade`), `<GRUPO>` (a pasta, como `estrutu
 </div>
 
 <div class="scrim"></div>
-<dialog class="search" id="search" data-shell="search" aria-label="Buscar no DevMap"></dialog>
+<dialog class="search" id="search" data-shell="search" aria-label="Buscar no Dev Atlas"></dialog>
 
 <script src="../../../../assets/js/site.js"></script>
 <script src="../../../../assets/js/shell.js"></script>
@@ -74,7 +74,7 @@ Troque `<PATTERN>` (o rótulo, como `Facade`), `<GRUPO>` (a pasta, como `estrutu
 </html>
 ```
 
-Na página Uso, o `<title>` é `Uso | <PATTERN> · DevMap` e o `h1` é `Uso`.
+Na página Uso, o `<title>` é `Uso | <PATTERN> · Dev Atlas` e o `h1` é `Uso`.
 
 O índice "Nesta página" é montado a partir de todos os `h2` e `h3` dentro de `.prose`. Por isso:
 

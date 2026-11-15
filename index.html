@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>DevMap</title>
+<title>Dev Atlas</title>
 <script>
   /* Define o tema antes de pintar a página, para não piscar. Mantenha em toda página. */
   (function () {
@@ -26,12 +26,12 @@
     <div class="main-row">
       <main class="article" id="main">
         <header>
-          <h1 class="page-title" tabindex="-1">DevMap</h1>
+          <h1 class="page-title" tabindex="-1">Dev Atlas</h1>
           <p class="lead">Meus estudos de programação, documentados em um só lugar: o que é este site, como ele está organizado e como eu escrevo nele.</p>
         </header>
 
         <div class="prose">
-          <h2 id="o-que-e">O que é o DevMap</h2>
+          <h2 id="o-que-e">O que é o Dev Atlas</h2>
           <p>Um lugar só meu para registrar o que eu estudo de programação. Nasceu de um problema simples: anotação espalhada em editor de texto, favorito do navegador e print de tela não vira conhecimento. Escrever a mesma coisa em um formato fixo, com um lugar certo para ela morar, vira.</p>
           <p>Não é blog nem portfólio. É material de consulta para mim mesmo, escrito no tom de quem explica para alguém que vai esquecer — porque esse alguém sou eu em três meses.</p>
 
@@ -68,7 +68,7 @@
           <h3 id="arvore">A árvore de arquivos</h3>
           <div class="code plain">
             <div class="code-body">
-              <pre><code>dev_map/
+              <pre><code>dev-atlas/
 ├─ index.html                  esta página
 ├─ assets/
 │  ├─ css/
@@ -148,17 +148,17 @@
           <div class="callout" data-kind="warn"><p>Uma página que existe mas não está no <code>site.js</code> abre pelo endereço direto e funciona, só não aparece no menu, na busca nem na paginação. Registre sempre.</p></div>
 
           <h2 id="estado">Em que estado isto está</h2>
-          <p>Esta é a primeira versão: a estrutura de base, montada para receber conteúdo. O que já funciona:</p>
+          <p>Esta é a estrutura completa, montada para receber conteúdo. O que já funciona:</p>
           <ul>
             <li>Abas, menu lateral e paginação gerados do mapa do site</li>
             <li>Busca por página com <kbd>Ctrl</kbd> <kbd>K</kbd> ou <kbd>/</kbd></li>
             <li>Índice da página montado a partir dos títulos</li>
             <li>Tema claro e escuro, com a escolha guardada no navegador</li>
           </ul>
-          <div class="callout" data-kind="note"><p>As páginas de conteúdo de verdade vêm depois. Por enquanto, a única aba tem só a sua visão geral.</p></div>
+          <div class="callout" data-kind="note"><p>O mapa já tem as dez áreas. Só Clean Code tem conteúdo escrito; as outras têm a visão geral e as páginas de cada assunto marcadas como vazias, e o conteúdo entra aos poucos.</p></div>
 
           <h2 id="design">Design</h2>
-          <p>O visual é o mesmo do BetterAI: os tokens, os componentes e as regras estão em <a href="_design-system/index.html">Design System</a>. A única diferença é que aqui não existe seletor de idioma — o DevMap é só em português.</p>
+          <p>O visual é o mesmo do BetterAI: os tokens, os componentes e as regras estão em <a href="_design-system/index.html">Design System</a>. A única diferença é que aqui não existe seletor de idioma — o Dev Atlas é só em português.</p>
           <div class="callout" data-kind="danger"><p>Não escreva cor, raio ou fonte dentro de uma página. Tudo vem das variáveis de <code>assets/css/tokens.css</code>. Para mudar o visual, mude o token — nunca o CSS de uma página.</p></div>
         </div>
 
@@ -171,7 +171,7 @@
 </div>
 
 <div class="scrim"></div>
-<dialog class="search" id="search" data-shell="search" aria-label="Buscar no DevMap"></dialog>
+<dialog class="search" id="search" data-shell="search" aria-label="Buscar no Dev Atlas"></dialog>
 
 <script src="assets/js/site.js"></script>
 <script src="assets/js/shell.js"></script>
