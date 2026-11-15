@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pub/Sub | Integração entre sistemas · Dev Atlas</title>
+<script>
+  /* Define o tema antes de pintar a página, para não piscar. Mantenha em toda página. */
+  (function () {
+    var t = null;
+    try { t = localStorage.getItem('devmap-theme'); } catch (e) {}
+    if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    document.documentElement.dataset.theme = t;
+  })();
+</script>
+<link rel="stylesheet" href="../../../../assets/css/design-system.css">
+</head>
+<body data-root="../../../../" data-tab="arquitetura" data-page="integracao-entre-sistemas/assincrono/pubsub">
+<a class="skip" href="#main">Ir para o conteúdo</a>
+
+<header class="header" id="header" data-shell="header"></header>
+
+<div class="shell">
+  <aside class="side-wrap" id="side" aria-label="Páginas de Arquitetura e Algoritmos" data-shell="side"></aside>
+  <div class="main">
+    <div class="main-row">
+      <main class="article" id="main">
+        <header>
+          <div class="eyebrow">Arquitetura e Algoritmos / Integração entre sistemas / Assíncrono</div>
+          <h1 class="page-title" tabindex="-1">Pub/Sub</h1>
+          <p class="lead">Um publicador emite um evento num tópico; todos os assinantes interessados recebem uma cópia.</p>
+        </header>
+
+        <div class="prose">
+          <h2 id="simulacao">Simulação</h2>
+          <p>Mexa nos controles e aperte os botões para ver o padrão funcionando, inclusive quando algo dá errado.</p>
+          <div data-sim="pubsub" data-title="Pub/Sub" style="--gc: #8a5a2f"></div>
+
+          <h2 id="como-funciona">Como funciona</h2>
+          <p>O publicador não sabe quem vai receber: só publica no tópico. Cada assinante tem a sua própria “caixa” e recebe uma cópia de cada mensagem, processando de forma independente. Novos interessados entram sem mexer no publicador, o que reduz o acoplamento. Na prática, costuma-se combinar com filas: cada assinante lê de uma fila própria ligada ao tópico.</p>
+
+          <h2 id="passo-a-passo">Passo a passo</h2>
+          <ol>
+            <li>Publicador envia o evento ao tópico (ex.: pedido.criado)</li>
+            <li>O broker copia o evento para cada assinatura</li>
+            <li>Cada assinante processa por conta própria</li>
+            <li>A falha de um assinante não afeta os demais</li>
+          </ol>
+
+          <h2 id="quando-usar">Quando usar</h2>
+          <ul>
+            <li>Um evento, vários interessados, sem acoplamento direto</li>
+            <li>Adicionar novos consumidores sem alterar quem produz</li>
+            <li>Propagar mudanças de estado entre serviços e domínios</li>
+          </ul>
+
+          <h2 id="quando-evitar">Quando evitar</h2>
+          <ul>
+            <li>Quando é preciso resposta direta do destinatário</li>
+            <li>Eventos mal definidos viram confusão entre equipes: trate-os como contrato</li>
+            <li>Rastrear “quem reagiu a quê” fica mais difícil (exige tracing)</li>
+          </ul>
+
+          <h2 id="exemplos">Exemplos</h2>
+          <ul>
+            <li>Pedido criado → estoque reserva, financeiro cobra, CRM atualiza, analytics registra</li>
+            <li>Notificações push para muitos dispositivos</li>
+            <li>Invalidação de cache distribuído</li>
+          </ul>
+
+          <h2 id="tecnologias">Tecnologias</h2>
+          <p><code>Google Pub/Sub</code>, <code>Amazon SNS</code>, <code>Kafka</code>, <code>RabbitMQ (topic/fanout)</code>, <code>Redis Pub/Sub</code>, <code>NATS</code></p>
+        </div>
+
+        <nav class="pager" data-shell="pager" aria-label="Páginas vizinhas"></nav>
+      </main>
+      <aside class="toc" id="toc" data-toc aria-label="Nesta página"></aside>
+    </div>
+    <footer class="site-foot" data-shell="footer"></footer>
+  </div>
+</div>
+
+<div class="scrim"></div>
+<dialog class="search" id="search" data-shell="search" aria-label="Buscar no Dev Atlas"></dialog>
+
+<script src="../../../../assets/js/site.js"></script>
+<script src="../../../../assets/js/shell.js"></script>
+<script src="../../../../assets/js/ds.js"></script>
+<script src="../../../../assets/js/sim.js"></script>
+</body>
+</html>

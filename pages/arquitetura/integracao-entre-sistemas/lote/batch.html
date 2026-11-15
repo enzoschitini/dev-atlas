@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Batch | Integração entre sistemas · Dev Atlas</title>
+<script>
+  /* Define o tema antes de pintar a página, para não piscar. Mantenha em toda página. */
+  (function () {
+    var t = null;
+    try { t = localStorage.getItem('devmap-theme'); } catch (e) {}
+    if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    document.documentElement.dataset.theme = t;
+  })();
+</script>
+<link rel="stylesheet" href="../../../../assets/css/design-system.css">
+</head>
+<body data-root="../../../../" data-tab="arquitetura" data-page="integracao-entre-sistemas/lote/batch">
+<a class="skip" href="#main">Ir para o conteúdo</a>
+
+<header class="header" id="header" data-shell="header"></header>
+
+<div class="shell">
+  <aside class="side-wrap" id="side" aria-label="Páginas de Arquitetura e Algoritmos" data-shell="side"></aside>
+  <div class="main">
+    <div class="main-row">
+      <main class="article" id="main">
+        <header>
+          <div class="eyebrow">Arquitetura e Algoritmos / Integração entre sistemas / Lote e dados</div>
+          <h1 class="page-title" tabindex="-1">Batch</h1>
+          <p class="lead">Os dados se acumulam e um job processa tudo de uma vez, em hora marcada ou quando o lote enche.</p>
+        </header>
+
+        <div class="prose">
+          <h2 id="simulacao">Simulação</h2>
+          <p>Mexa nos controles e aperte os botões para ver o padrão funcionando, inclusive quando algo dá errado.</p>
+          <div data-sim="batch" data-title="Batch" style="--gc: #6b4f9a"></div>
+
+          <h2 id="como-funciona">Como funciona</h2>
+          <p>Um agendador (cron ou orquestrador) dispara o job num horário definido ou quando o volume atinge um limite. O job lê um grande conjunto de dados, transforma e grava o resultado: relatórios, arquivos, tabelas agregadas. Como roda fora do pico, usa os recursos com eficiência, e se falhar, reexecuta-se o lote. A latência é alta por definição.</p>
+
+          <h2 id="passo-a-passo">Passo a passo</h2>
+          <ol>
+            <li>Os dados se acumulam ao longo do dia</li>
+            <li>O agendador dispara o job (ex.: 02:00)</li>
+            <li>O job lê o lote, processa e grava o resultado</li>
+            <li>Em caso de erro, reexecuta ou retoma do último checkpoint</li>
+          </ol>
+
+          <h2 id="quando-usar">Quando usar</h2>
+          <ul>
+            <li>Grandes volumes processados com eficiência</li>
+            <li>Cargas pesadas fora do horário de pico</li>
+            <li>Integração com sistemas legados que trocam arquivos</li>
+            <li>Relatórios agregados que não precisam ser instantâneos</li>
+          </ul>
+
+          <h2 id="quando-evitar">Quando evitar</h2>
+          <ul>
+            <li>Quando a decisão precisa ser imediata (fraude, notificações)</li>
+            <li>Atraso: o dado de hoje só aparece amanhã</li>
+            <li>Jobs gigantes que falham no meio: projete checkpoints e idempotência</li>
+          </ul>
+
+          <h2 id="exemplos">Exemplos</h2>
+          <ul>
+            <li>Fechamento contábil e faturamento mensal</li>
+            <li>Conciliação bancária na madrugada e arquivos de remessa (CNAB)</li>
+            <li>ETL carregando vendas no data warehouse</li>
+          </ul>
+
+          <h2 id="tecnologias">Tecnologias</h2>
+          <p><code>cron</code>, <code>Apache Airflow</code>, <code>Spark</code>, <code>dbt</code>, <code>AWS Batch</code>, <code>Spring Batch</code></p>
+        </div>
+
+        <nav class="pager" data-shell="pager" aria-label="Páginas vizinhas"></nav>
+      </main>
+      <aside class="toc" id="toc" data-toc aria-label="Nesta página"></aside>
+    </div>
+    <footer class="site-foot" data-shell="footer"></footer>
+  </div>
+</div>
+
+<div class="scrim"></div>
+<dialog class="search" id="search" data-shell="search" aria-label="Buscar no Dev Atlas"></dialog>
+
+<script src="../../../../assets/js/site.js"></script>
+<script src="../../../../assets/js/shell.js"></script>
+<script src="../../../../assets/js/ds.js"></script>
+<script src="../../../../assets/js/sim.js"></script>
+</body>
+</html>

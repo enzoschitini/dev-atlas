@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Webhooks | Integração entre sistemas · Dev Atlas</title>
+<script>
+  /* Define o tema antes de pintar a página, para não piscar. Mantenha em toda página. */
+  (function () {
+    var t = null;
+    try { t = localStorage.getItem('devmap-theme'); } catch (e) {}
+    if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    document.documentElement.dataset.theme = t;
+  })();
+</script>
+<link rel="stylesheet" href="../../../../assets/css/design-system.css">
+</head>
+<body data-root="../../../../" data-tab="arquitetura" data-page="integracao-entre-sistemas/assincrono/webhook">
+<a class="skip" href="#main">Ir para o conteúdo</a>
+
+<header class="header" id="header" data-shell="header"></header>
+
+<div class="shell">
+  <aside class="side-wrap" id="side" aria-label="Páginas de Arquitetura e Algoritmos" data-shell="side"></aside>
+  <div class="main">
+    <div class="main-row">
+      <main class="article" id="main">
+        <header>
+          <div class="eyebrow">Arquitetura e Algoritmos / Integração entre sistemas / Assíncrono</div>
+          <h1 class="page-title" tabindex="-1">Webhooks</h1>
+          <p class="lead">Em vez de você perguntar, o serviço externo chama uma URL sua quando algo acontece.</p>
+        </header>
+
+        <div class="prose">
+          <h2 id="simulacao">Simulação</h2>
+          <p>Mexa nos controles e aperte os botões para ver o padrão funcionando, inclusive quando algo dá errado.</p>
+          <div data-sim="webhook" data-title="Webhooks" style="--gc: #8a5a2f"></div>
+
+          <h2 id="como-funciona">Como funciona</h2>
+          <p>Você cadastra no provedor uma URL pública do seu sistema. Quando o evento ocorre, o provedor faz um POST nessa URL com os dados em JSON. Seu endpoint valida a assinatura (para ter certeza de que veio do provedor), responde 2xx rápido e processa o restante em segundo plano. Se não responder, o provedor tenta de novo com intervalos crescentes.</p>
+
+          <h2 id="passo-a-passo">Passo a passo</h2>
+          <ol>
+            <li>Você registra a URL e os eventos desejados</li>
+            <li>Algo acontece no provedor (ex.: pagamento aprovado)</li>
+            <li>O provedor envia um POST com o payload e a assinatura</li>
+            <li>Seu sistema valida, responde 200 e processa</li>
+          </ol>
+
+          <h2 id="quando-usar">Quando usar</h2>
+          <ul>
+            <li>Evitar polling: nada de requisições inúteis</li>
+            <li>Notificação quase em tempo real entre empresas e sistemas distintos</li>
+            <li>Integrar com terceiros sem manter conexão aberta</li>
+          </ul>
+
+          <h2 id="quando-evitar">Quando evitar</h2>
+          <ul>
+            <li>Processar tudo dentro da requisição: estoura o timeout (enfileire)</li>
+            <li>Aceitar sem validar a assinatura: qualquer um poderia forjar eventos</li>
+            <li>Eventos podem chegar duplicados ou fora de ordem; sua URL precisa estar no ar</li>
+          </ul>
+
+          <h2 id="exemplos">Exemplos</h2>
+          <ul>
+            <li>Gateway de pagamento avisando que a cobrança foi aprovada</li>
+            <li>GitHub disparando o pipeline de CI a cada push</li>
+            <li>Transportadoras avisando mudança de status da entrega</li>
+          </ul>
+
+          <h2 id="tecnologias">Tecnologias</h2>
+          <p><code>Stripe</code>, <code>GitHub</code>, <code>Slack</code>, <code>Twilio</code>, <code>Svix</code>, <code>Hookdeck</code></p>
+        </div>
+
+        <nav class="pager" data-shell="pager" aria-label="Páginas vizinhas"></nav>
+      </main>
+      <aside class="toc" id="toc" data-toc aria-label="Nesta página"></aside>
+    </div>
+    <footer class="site-foot" data-shell="footer"></footer>
+  </div>
+</div>
+
+<div class="scrim"></div>
+<dialog class="search" id="search" data-shell="search" aria-label="Buscar no Dev Atlas"></dialog>
+
+<script src="../../../../assets/js/site.js"></script>
+<script src="../../../../assets/js/shell.js"></script>
+<script src="../../../../assets/js/ds.js"></script>
+<script src="../../../../assets/js/sim.js"></script>
+</body>
+</html>

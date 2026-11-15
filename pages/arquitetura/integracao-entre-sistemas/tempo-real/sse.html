@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Server-Sent Events | Integração entre sistemas · Dev Atlas</title>
+<script>
+  /* Define o tema antes de pintar a página, para não piscar. Mantenha em toda página. */
+  (function () {
+    var t = null;
+    try { t = localStorage.getItem('devmap-theme'); } catch (e) {}
+    if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    document.documentElement.dataset.theme = t;
+  })();
+</script>
+<link rel="stylesheet" href="../../../../assets/css/design-system.css">
+</head>
+<body data-root="../../../../" data-tab="arquitetura" data-page="integracao-entre-sistemas/tempo-real/sse">
+<a class="skip" href="#main">Ir para o conteúdo</a>
+
+<header class="header" id="header" data-shell="header"></header>
+
+<div class="shell">
+  <aside class="side-wrap" id="side" aria-label="Páginas de Arquitetura e Algoritmos" data-shell="side"></aside>
+  <div class="main">
+    <div class="main-row">
+      <main class="article" id="main">
+        <header>
+          <div class="eyebrow">Arquitetura e Algoritmos / Integração entre sistemas / Tempo real e push</div>
+          <h1 class="page-title" tabindex="-1">Server-Sent Events</h1>
+          <p class="lead">O navegador abre uma conexão HTTP e o servidor vai enviando eventos por ela, só nesse sentido.</p>
+        </header>
+
+        <div class="prose">
+          <h2 id="simulacao">Simulação</h2>
+          <p>Mexa nos controles e aperte os botões para ver o padrão funcionando, inclusive quando algo dá errado.</p>
+          <div data-sim="sse" data-title="Server-Sent Events" style="--gc: #2f8a5d"></div>
+
+          <h2 id="como-funciona">Como funciona</h2>
+          <p>O cliente faz um GET pedindo text/event-stream e o servidor mantém a resposta aberta, escrevendo eventos em texto conforme acontecem. A API EventSource do navegador reconecta sozinha e usa Last-Event-ID para retomar do ponto em que parou. É mais simples que o WebSocket: é HTTP normal e se dá bem com proxies.</p>
+
+          <h2 id="passo-a-passo">Passo a passo</h2>
+          <ol>
+            <li>Cliente abre um GET com Accept: text/event-stream</li>
+            <li>Servidor mantém a resposta aberta</li>
+            <li>A cada fato, servidor escreve um evento no fluxo</li>
+            <li>Se a conexão cair, o navegador reconecta e retoma do último ID</li>
+          </ol>
+
+          <h2 id="quando-usar">Quando usar</h2>
+          <ul>
+            <li>Push do servidor para o cliente sem a complexidade do WebSocket</li>
+            <li>Reconexão automática embutida</li>
+            <li>Notificações unidirecionais em escala</li>
+          </ul>
+
+          <h2 id="quando-evitar">Quando evitar</h2>
+          <ul>
+            <li>Quando o cliente também precisa mandar mensagens frequentes (use WebSocket)</li>
+            <li>Só trafega texto (UTF-8); binário precisa ser codificado</li>
+            <li>Em HTTP/1.1 o navegador limita conexões simultâneas por domínio</li>
+          </ul>
+
+          <h2 id="exemplos">Exemplos</h2>
+          <ul>
+            <li>Placar ao vivo e feed de notícias</li>
+            <li>Barra de progresso de uma tarefa longa (upload, build)</li>
+            <li>Respostas de IA chegando palavra por palavra (muitas APIs de LLM usam SSE)</li>
+          </ul>
+
+          <h2 id="tecnologias">Tecnologias</h2>
+          <p><code>EventSource</code>, <code>HTTP/2</code>, <code>Mercure</code>, <code>frameworks web</code></p>
+        </div>
+
+        <nav class="pager" data-shell="pager" aria-label="Páginas vizinhas"></nav>
+      </main>
+      <aside class="toc" id="toc" data-toc aria-label="Nesta página"></aside>
+    </div>
+    <footer class="site-foot" data-shell="footer"></footer>
+  </div>
+</div>
+
+<div class="scrim"></div>
+<dialog class="search" id="search" data-shell="search" aria-label="Buscar no Dev Atlas"></dialog>
+
+<script src="../../../../assets/js/site.js"></script>
+<script src="../../../../assets/js/shell.js"></script>
+<script src="../../../../assets/js/ds.js"></script>
+<script src="../../../../assets/js/sim.js"></script>
+</body>
+</html>

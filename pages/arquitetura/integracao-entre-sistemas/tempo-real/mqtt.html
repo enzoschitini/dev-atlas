@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MQTT | Integração entre sistemas · Dev Atlas</title>
+<script>
+  /* Define o tema antes de pintar a página, para não piscar. Mantenha em toda página. */
+  (function () {
+    var t = null;
+    try { t = localStorage.getItem('devmap-theme'); } catch (e) {}
+    if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    document.documentElement.dataset.theme = t;
+  })();
+</script>
+<link rel="stylesheet" href="../../../../assets/css/design-system.css">
+</head>
+<body data-root="../../../../" data-tab="arquitetura" data-page="integracao-entre-sistemas/tempo-real/mqtt">
+<a class="skip" href="#main">Ir para o conteúdo</a>
+
+<header class="header" id="header" data-shell="header"></header>
+
+<div class="shell">
+  <aside class="side-wrap" id="side" aria-label="Páginas de Arquitetura e Algoritmos" data-shell="side"></aside>
+  <div class="main">
+    <div class="main-row">
+      <main class="article" id="main">
+        <header>
+          <div class="eyebrow">Arquitetura e Algoritmos / Integração entre sistemas / Tempo real e push</div>
+          <h1 class="page-title" tabindex="-1">MQTT</h1>
+          <p class="lead">Protocolo pub/sub minimalista, pensado para sensores e dispositivos com pouca banda e energia.</p>
+        </header>
+
+        <div class="prose">
+          <h2 id="simulacao">Simulação</h2>
+          <p>Mexa nos controles e aperte os botões para ver o padrão funcionando, inclusive quando algo dá errado.</p>
+          <div data-sim="mqtt" data-title="MQTT" style="--gc: #2f8a5d"></div>
+
+          <h2 id="como-funciona">Como funciona</h2>
+          <p>Os dispositivos conectam a um broker e publicam mensagens em tópicos hierárquicos (casa/sala/temperatura). Quem se interessa assina o tópico, podendo usar curingas (+ e #). O cabeçalho é mínimo e há três níveis de QoS: 0 (no máximo uma vez), 1 (ao menos uma) e 2 (exatamente uma). Há ainda retained messages (o último valor fica guardado) e Last Will (aviso automático se um dispositivo cair).</p>
+
+          <h2 id="passo-a-passo">Passo a passo</h2>
+          <ol>
+            <li>Dispositivo conecta ao broker</li>
+            <li>Publica leituras num tópico (casa/sala/temp)</li>
+            <li>Quem assinou o tópico (ou um curinga) recebe</li>
+            <li>Broker aplica o QoS e guarda o último valor, se configurado</li>
+          </ol>
+
+          <h2 id="quando-usar">Quando usar</h2>
+          <ul>
+            <li>Dispositivos com bateria e CPU limitadas</li>
+            <li>Redes instáveis (reconexão e QoS)</li>
+            <li>Milhares de dispositivos enviando pequenas leituras</li>
+          </ul>
+
+          <h2 id="quando-evitar">Quando evitar</h2>
+          <ul>
+            <li>Payloads grandes ou fluxos de alto volume (prefira streaming)</li>
+            <li>Se não há dispositivos restritos, um pub/sub comum basta</li>
+            <li>Segurança: use TLS e autenticação; há muitos brokers expostos sem proteção</li>
+          </ul>
+
+          <h2 id="exemplos">Exemplos</h2>
+          <ul>
+            <li>Casa inteligente: sensores, lâmpadas e termostatos</li>
+            <li>IoT industrial: monitoramento de máquinas em fábricas</li>
+            <li>Rastreadores de frota com conexão móvel instável</li>
+          </ul>
+
+          <h2 id="tecnologias">Tecnologias</h2>
+          <p><code>Mosquitto</code>, <code>EMQX</code>, <code>HiveMQ</code>, <code>AWS IoT Core</code></p>
+        </div>
+
+        <nav class="pager" data-shell="pager" aria-label="Páginas vizinhas"></nav>
+      </main>
+      <aside class="toc" id="toc" data-toc aria-label="Nesta página"></aside>
+    </div>
+    <footer class="site-foot" data-shell="footer"></footer>
+  </div>
+</div>
+
+<div class="scrim"></div>
+<dialog class="search" id="search" data-shell="search" aria-label="Buscar no Dev Atlas"></dialog>
+
+<script src="../../../../assets/js/site.js"></script>
+<script src="../../../../assets/js/shell.js"></script>
+<script src="../../../../assets/js/ds.js"></script>
+<script src="../../../../assets/js/sim.js"></script>
+</body>
+</html>

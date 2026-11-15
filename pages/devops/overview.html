@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Overview | DevOps · Dev Atlas</title>
+<script>
+  /* Define o tema antes de pintar a página, para não piscar. Mantenha em toda página. */
+  (function () {
+    var t = null;
+    try { t = localStorage.getItem('devmap-theme'); } catch (e) {}
+    if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    document.documentElement.dataset.theme = t;
+  })();
+</script>
+<link rel="stylesheet" href="../../assets/css/design-system.css">
+</head>
+<body data-root="../../" data-tab="devops" data-page="overview">
+<a class="skip" href="#main">Ir para o conteúdo</a>
+
+<header class="header" id="header" data-shell="header"></header>
+
+<div class="shell">
+  <aside class="side-wrap" id="side" aria-label="Páginas de DevOps" data-shell="side"></aside>
+  <div class="main">
+    <div class="main-row">
+      <main class="article" id="main">
+        <header>
+          <div class="eyebrow">DevOps</div>
+          <h1 class="page-title" tabindex="-1">Overview</h1>
+          <p class="lead">O que entra em DevOps: colocar no ar, observar e manter funcionando.</p>
+        </header>
+
+        <div class="prose">
+          <h2 id="nesta-aba">O que tem nesta aba</h2>
+          <ul>
+            <li><a href="servers.html"><strong>Servers</strong></a> — servidores: configuração, acesso e manutenção.</li>
+            <li><a href="metrics.html"><strong>Metrics</strong></a> — o que medir, como coletar e como ler.</li>
+            <li><a href="optimization.html"><strong>Optimization</strong></a> — achar o gargalo e reduzir tempo e custo.</li>
+            <li><a href="security.html"><strong>Security</strong></a> — segredos, acessos e o básico para não ser o elo fraco.</li>
+            <li><a href="aws.html"><strong>AWS</strong></a> — os serviços da AWS que aparecem nos projetos.</li>
+            <li><a href="vercel.html"><strong>Vercel</strong></a> — deploy, domínios, variáveis e logs na Vercel.</li>
+          </ul>
+          <div class="callout" data-kind="note"><p>As páginas desta aba ainda estão vazias. O conteúdo entra aos poucos, sem ordem fixa.</p></div>
+        </div>
+
+        <nav class="pager" data-shell="pager" aria-label="Páginas vizinhas"></nav>
+      </main>
+      <aside class="toc" id="toc" data-toc aria-label="Nesta página"></aside>
+    </div>
+    <footer class="site-foot" data-shell="footer"></footer>
+  </div>
+</div>
+
+<div class="scrim"></div>
+<dialog class="search" id="search" data-shell="search" aria-label="Buscar no Dev Atlas"></dialog>
+
+<script src="../../assets/js/site.js"></script>
+<script src="../../assets/js/shell.js"></script>
+<script src="../../assets/js/ds.js"></script>
+</body>
+</html>

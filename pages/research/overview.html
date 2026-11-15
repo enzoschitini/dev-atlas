@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Overview | Research · Dev Atlas</title>
+<script>
+  /* Define o tema antes de pintar a página, para não piscar. Mantenha em toda página. */
+  (function () {
+    var t = null;
+    try { t = localStorage.getItem('devmap-theme'); } catch (e) {}
+    if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    document.documentElement.dataset.theme = t;
+  })();
+</script>
+<link rel="stylesheet" href="../../assets/css/design-system.css">
+</head>
+<body data-root="../../" data-tab="research" data-page="overview">
+<a class="skip" href="#main">Ir para o conteúdo</a>
+
+<header class="header" id="header" data-shell="header"></header>
+
+<div class="shell">
+  <aside class="side-wrap" id="side" aria-label="Páginas de Research" data-shell="side"></aside>
+  <div class="main">
+    <div class="main-row">
+      <main class="article" id="main">
+        <header>
+          <div class="eyebrow">Research</div>
+          <h1 class="page-title" tabindex="-1">Overview</h1>
+          <p class="lead">O que entra em Research: pesquisa: notícias, Claude, projetos e documentações.</p>
+        </header>
+
+        <div class="prose">
+          <h2 id="nesta-aba">O que tem nesta aba</h2>
+          <ul>
+            <li><a href="news-blogs.html"><strong>News/Blogs</strong></a> — notícias e blogs que vale acompanhar.</li>
+            <li><a href="claude.html"><strong>Claude</strong></a> — novidades, recursos e jeitos de usar o Claude.</li>
+            <li><a href="projects.html"><strong>Projects</strong></a> — projetos que estudo ou uso de referência.</li>
+            <li><a href="documentations.html"><strong>Documentations</strong></a> — documentações oficiais que consulto com frequência.</li>
+          </ul>
+          <div class="callout" data-kind="note"><p>As páginas desta aba ainda estão vazias. O conteúdo entra aos poucos, sem ordem fixa.</p></div>
+        </div>
+
+        <nav class="pager" data-shell="pager" aria-label="Páginas vizinhas"></nav>
+      </main>
+      <aside class="toc" id="toc" data-toc aria-label="Nesta página"></aside>
+    </div>
+    <footer class="site-foot" data-shell="footer"></footer>
+  </div>
+</div>
+
+<div class="scrim"></div>
+<dialog class="search" id="search" data-shell="search" aria-label="Buscar no Dev Atlas"></dialog>
+
+<script src="../../assets/js/site.js"></script>
+<script src="../../assets/js/shell.js"></script>
+<script src="../../assets/js/ds.js"></script>
+</body>
+</html>

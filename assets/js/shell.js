@@ -1,5 +1,5 @@
 /*
- * DevMap — monta a moldura de toda página a partir do window.DEVMAP.
+ * Dev Atlas — monta a moldura de toda página a partir do window.DEVMAP.
  *
  * Carregue sempre nesta ordem, no fim do <body>:
  *   site.js    o mapa do site
@@ -23,7 +23,7 @@
 (function () {
   'use strict';
 
-  var MAP = window.DEVMAP || { name: 'DevMap', tabs: [] };
+  var MAP = window.DEVMAP || { name: 'Dev Atlas', tabs: [] };
   var $ = function (s, r) { return (r || document).querySelector(s); };
   var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
   var esc = function (s) {

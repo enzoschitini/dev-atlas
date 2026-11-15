@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Overview | Integração entre sistemas · Dev Atlas</title>
+<script>
+  /* Define o tema antes de pintar a página, para não piscar. Mantenha em toda página. */
+  (function () {
+    var t = null;
+    try { t = localStorage.getItem('devmap-theme'); } catch (e) {}
+    if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    document.documentElement.dataset.theme = t;
+  })();
+</script>
+<link rel="stylesheet" href="../../../assets/css/design-system.css">
+</head>
+<body data-root="../../../" data-tab="arquitetura" data-page="integracao-entre-sistemas/overview">
+<a class="skip" href="#main">Ir para o conteúdo</a>
+
+<header class="header" id="header" data-shell="header"></header>
+
+<div class="shell">
+  <aside class="side-wrap" id="side" aria-label="Páginas de Arquitetura e Algoritmos" data-shell="side"></aside>
+  <div class="main">
+    <div class="main-row">
+      <main class="article" id="main">
+        <header>
+          <div class="eyebrow">Arquitetura e Algoritmos / Integração entre sistemas</div>
+          <h1 class="page-title" tabindex="-1">Overview</h1>
+          <p class="lead">Os padrões de comunicação entre sistemas, do pedido-e-resposta ao streaming, em seis grupos.</p>
+        </header>
+
+        <div class="prose">
+          <h2 id="o-que-e">O que é integração entre sistemas</h2>
+          <p>As formas de dois ou mais sistemas trocarem dados e se coordenarem. Cada forma tem um custo: quem espera quem, o que acontece quando um lado cai, quanto um sistema fica preso ao outro. Escolher bem é escolher o custo que o caso aguenta.</p>
+          <p>São 22 padrões em 6 grupos. Cada página traz uma simulação interativa do padrão (com falhas, picos e reentregas), como ele funciona, o passo a passo, quando usar, quando evitar, exemplos e tecnologias.</p>
+
+          <h2 id="padroes">Os padrões</h2>
+          <h3 id="sincrono">1. Síncrono</h3>
+          <p>Você pergunta e espera a resposta.</p>
+          <ul>
+            <li><a href="sincrono/request-response.html"><strong>Request-response</strong></a> — responde agora</li>
+            <li><a href="sincrono/grpc.html"><strong>RPC / gRPC</strong></a> — chama a função do outro lado</li>
+            <li><a href="sincrono/graphql.html"><strong>GraphQL</strong></a> — peça só o que precisa</li>
+          </ul>
+
+          <h3 id="assincrono">2. Assíncrono</h3>
+          <p>Você manda e segue a vida.</p>
+          <ul>
+            <li><a href="assincrono/fila.html"><strong>Fila de mensagens</strong></a> — processa depois</li>
+            <li><a href="assincrono/pubsub.html"><strong>Pub/Sub</strong></a> — avisa muitos</li>
+            <li><a href="assincrono/webhook.html"><strong>Webhooks</strong></a> — o serviço liga para você</li>
+            <li><a href="assincrono/reqreply.html"><strong>Request-reply assíncrono</strong></a> — pede agora, recebe depois</li>
+          </ul>
+
+          <h3 id="tempo-real">3. Tempo real e push</h3>
+          <p>A informação chega assim que existe.</p>
+          <ul>
+            <li><a href="tempo-real/polling.html"><strong>Polling e long polling</strong></a> — fica perguntando</li>
+            <li><a href="tempo-real/websocket.html"><strong>WebSocket</strong></a> — conversa nos dois sentidos</li>
+            <li><a href="tempo-real/sse.html"><strong>Server-Sent Events</strong></a> — o servidor só transmite</li>
+            <li><a href="tempo-real/streaming.html"><strong>Streaming de eventos</strong></a> — processa sem parar</li>
+            <li><a href="tempo-real/mqtt.html"><strong>MQTT</strong></a> — leve para dispositivos</li>
+          </ul>
+
+          <h3 id="lote">4. Lote e dados</h3>
+          <p>Acumula e processa de uma vez, ou observa o que mudou.</p>
+          <ul>
+            <li><a href="lote/batch.html"><strong>Batch</strong></a> — processa em lotes</li>
+            <li><a href="lote/cdc.html"><strong>CDC</strong></a> — transforma mudança em evento</li>
+          </ul>
+
+          <h3 id="coordenacao">5. Coordenação e consistência</h3>
+          <p>Como usar tudo isso sem se perder.</p>
+          <ul>
+            <li><a href="coordenacao/saga.html"><strong>Saga</strong></a> — transação em passos, com desfazer</li>
+            <li><a href="coordenacao/outbox.html"><strong>Outbox</strong></a> — nunca perca o evento</li>
+            <li><a href="coordenacao/eventsourcing.html"><strong>Event sourcing</strong></a> — a história é a verdade</li>
+            <li><a href="coordenacao/cqrs.html"><strong>CQRS</strong></a> — separa ler de escrever</li>
+            <li><a href="coordenacao/scatter.html"><strong>Scatter-gather</strong></a> — pergunta a todos e junta</li>
+            <li><a href="coordenacao/gossip.html"><strong>Gossip</strong></a> — a notícia se espalha</li>
+          </ul>
+
+          <h3 id="infra">6. Infraestrutura de apoio</h3>
+          <p>A base que organiza o tráfego.</p>
+          <ul>
+            <li><a href="infra/gateway.html"><strong>API Gateway</strong></a> — porta de entrada única</li>
+            <li><a href="infra/mesh.html"><strong>Service mesh</strong></a> — rede inteligente entre serviços</li>
+          </ul>
+
+          <h2 id="laboratorio">Laboratório</h2>
+          <p>A origem das simulações é este artefato, que reúne todas em uma página só: <a href="https://claude.ai/artifact/J3dp58n7xB8Ktbq63HaWiH">Laboratório de integração</a>.</p>
+        </div>
+
+        <nav class="pager" data-shell="pager" aria-label="Páginas vizinhas"></nav>
+      </main>
+      <aside class="toc" id="toc" data-toc aria-label="Nesta página"></aside>
+    </div>
+    <footer class="site-foot" data-shell="footer"></footer>
+  </div>
+</div>
+
+<div class="scrim"></div>
+<dialog class="search" id="search" data-shell="search" aria-label="Buscar no Dev Atlas"></dialog>
+
+<script src="../../../assets/js/site.js"></script>
+<script src="../../../assets/js/shell.js"></script>
+<script src="../../../assets/js/ds.js"></script>
+</body>
+</html>

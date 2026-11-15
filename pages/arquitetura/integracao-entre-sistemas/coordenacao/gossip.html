@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gossip | Integração entre sistemas · Dev Atlas</title>
+<script>
+  /* Define o tema antes de pintar a página, para não piscar. Mantenha em toda página. */
+  (function () {
+    var t = null;
+    try { t = localStorage.getItem('devmap-theme'); } catch (e) {}
+    if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    document.documentElement.dataset.theme = t;
+  })();
+</script>
+<link rel="stylesheet" href="../../../../assets/css/design-system.css">
+</head>
+<body data-root="../../../../" data-tab="arquitetura" data-page="integracao-entre-sistemas/coordenacao/gossip">
+<a class="skip" href="#main">Ir para o conteúdo</a>
+
+<header class="header" id="header" data-shell="header"></header>
+
+<div class="shell">
+  <aside class="side-wrap" id="side" aria-label="Páginas de Arquitetura e Algoritmos" data-shell="side"></aside>
+  <div class="main">
+    <div class="main-row">
+      <main class="article" id="main">
+        <header>
+          <div class="eyebrow">Arquitetura e Algoritmos / Integração entre sistemas / Coordenação e consistência</div>
+          <h1 class="page-title" tabindex="-1">Gossip</h1>
+          <p class="lead">Cada nó conta o que sabe para alguns vizinhos aleatórios, e a informação se espalha como um boato.</p>
+        </header>
+
+        <div class="prose">
+          <h2 id="simulacao">Simulação</h2>
+          <p>Mexa nos controles e aperte os botões para ver o padrão funcionando, inclusive quando algo dá errado.</p>
+          <div data-sim="gossip" data-title="Gossip" style="--gc: #9a3f4f"></div>
+
+          <h2 id="como-funciona">Como funciona</h2>
+          <p>Periodicamente cada nó escolhe alguns outros ao acaso e troca informações de estado com eles. Em poucas rodadas, na ordem de log N, a informação chega a todos, sem coordenador central e tolerando nós que caem. Também serve para detectar falhas: o nó de quem ninguém mais ouve falar passa a ser suspeito.</p>
+
+          <h2 id="passo-a-passo">Passo a passo</h2>
+          <ol>
+            <li>Um nó fica sabendo de uma novidade</li>
+            <li>Na próxima rodada, conta para alguns vizinhos aleatórios</li>
+            <li>Cada vizinho repete o processo</li>
+            <li>Em poucas rodadas todo o cluster converge</li>
+          </ol>
+
+          <h2 id="quando-usar">Quando usar</h2>
+          <ul>
+            <li>Disseminar estado em clusters grandes sem ponto único de falha</li>
+            <li>Detectar nós caídos</li>
+            <li>Consistência eventual escalável</li>
+          </ul>
+
+          <h2 id="quando-evitar">Quando evitar</h2>
+          <ul>
+            <li>A convergência é probabilística, não instantânea</li>
+            <li>Não serve quando é preciso consistência forte ou ordem</li>
+            <li>Gera tráfego constante, mesmo sem mudanças</li>
+          </ul>
+
+          <h2 id="exemplos">Exemplos</h2>
+          <ul>
+            <li>Cassandra e DynamoDB: descoberta de membros e detecção de falhas</li>
+            <li>Consul/Serf: lista de nós e saúde do cluster</li>
+            <li>Redis Cluster: troca de estado entre os nós</li>
+          </ul>
+
+          <h2 id="tecnologias">Tecnologias</h2>
+          <p><code>Serf / memberlist</code>, <code>Cassandra</code>, <code>Consul</code>, <code>Redis Cluster</code>, <code>SWIM</code></p>
+        </div>
+
+        <nav class="pager" data-shell="pager" aria-label="Páginas vizinhas"></nav>
+      </main>
+      <aside class="toc" id="toc" data-toc aria-label="Nesta página"></aside>
+    </div>
+    <footer class="site-foot" data-shell="footer"></footer>
+  </div>
+</div>
+
+<div class="scrim"></div>
+<dialog class="search" id="search" data-shell="search" aria-label="Buscar no Dev Atlas"></dialog>
+
+<script src="../../../../assets/js/site.js"></script>
+<script src="../../../../assets/js/shell.js"></script>
+<script src="../../../../assets/js/ds.js"></script>
+<script src="../../../../assets/js/sim.js"></script>
+</body>
+</html>

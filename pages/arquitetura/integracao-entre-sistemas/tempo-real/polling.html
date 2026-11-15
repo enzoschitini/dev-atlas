@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Polling e long polling | Integração entre sistemas · Dev Atlas</title>
+<script>
+  /* Define o tema antes de pintar a página, para não piscar. Mantenha em toda página. */
+  (function () {
+    var t = null;
+    try { t = localStorage.getItem('devmap-theme'); } catch (e) {}
+    if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    document.documentElement.dataset.theme = t;
+  })();
+</script>
+<link rel="stylesheet" href="../../../../assets/css/design-system.css">
+</head>
+<body data-root="../../../../" data-tab="arquitetura" data-page="integracao-entre-sistemas/tempo-real/polling">
+<a class="skip" href="#main">Ir para o conteúdo</a>
+
+<header class="header" id="header" data-shell="header"></header>
+
+<div class="shell">
+  <aside class="side-wrap" id="side" aria-label="Páginas de Arquitetura e Algoritmos" data-shell="side"></aside>
+  <div class="main">
+    <div class="main-row">
+      <main class="article" id="main">
+        <header>
+          <div class="eyebrow">Arquitetura e Algoritmos / Integração entre sistemas / Tempo real e push</div>
+          <h1 class="page-title" tabindex="-1">Polling e long polling</h1>
+          <p class="lead">O cliente pergunta de tempos em tempos se há novidade (polling) ou o servidor segura a pergunta até ter algo (long polling).</p>
+        </header>
+
+        <div class="prose">
+          <h2 id="simulacao">Simulação</h2>
+          <p>Mexa nos controles e aperte os botões para ver o padrão funcionando, inclusive quando algo dá errado.</p>
+          <div data-sim="polling" data-title="Polling e long polling" style="--gc: #2f8a5d"></div>
+
+          <h2 id="como-funciona">Como funciona</h2>
+          <p>No polling simples o cliente repete a requisição a cada N segundos: é fácil, mas gera muitas respostas vazias e a novidade só chega no próximo ciclo. No long polling o servidor mantém a requisição aberta até haver um dado (ou estourar o timeout); ao responder, o cliente abre outra. Reduz latência e requisições vazias sem nenhuma tecnologia especial.</p>
+
+          <h2 id="passo-a-passo">Passo a passo</h2>
+          <ol>
+            <li>Cliente pergunta “tem novidade?”</li>
+            <li>Polling: o servidor responde na hora (muitas vezes “não”)</li>
+            <li>Long polling: o servidor segura até ter dado ou timeout</li>
+            <li>Cliente processa e pergunta de novo</li>
+          </ol>
+
+          <h2 id="quando-usar">Quando usar</h2>
+          <ul>
+            <li>Receber atualizações quando só há HTTP simples (firewalls, sistemas legados)</li>
+            <li>Quando o provedor não oferece webhook nem push</li>
+            <li>Atualizações não críticas no tempo</li>
+          </ul>
+
+          <h2 id="quando-evitar">Quando evitar</h2>
+          <ul>
+            <li>Intervalos curtos com muitos clientes geram carga enorme no servidor</li>
+            <li>Long polling prende conexões: exige servidor assíncrono</li>
+            <li>Dica: use backoff e ETag / If-None-Match para tornar as respostas vazias baratas</li>
+          </ul>
+
+          <h2 id="exemplos">Exemplos</h2>
+          <ul>
+            <li>App conferindo o status de um pagamento Pix a cada poucos segundos</li>
+            <li>Painel de monitoramento que atualiza de 30 em 30 s</li>
+            <li>Chats antigos, antes do WebSocket, usavam long polling</li>
+          </ul>
+
+          <h2 id="tecnologias">Tecnologias</h2>
+          <p><code>HTTP puro</code>, <code>timers / cron</code>, <code>ETag</code>, <code>Socket.IO (fallback)</code></p>
+        </div>
+
+        <nav class="pager" data-shell="pager" aria-label="Páginas vizinhas"></nav>
+      </main>
+      <aside class="toc" id="toc" data-toc aria-label="Nesta página"></aside>
+    </div>
+    <footer class="site-foot" data-shell="footer"></footer>
+  </div>
+</div>
+
+<div class="scrim"></div>
+<dialog class="search" id="search" data-shell="search" aria-label="Buscar no Dev Atlas"></dialog>
+
+<script src="../../../../assets/js/site.js"></script>
+<script src="../../../../assets/js/shell.js"></script>
+<script src="../../../../assets/js/ds.js"></script>
+<script src="../../../../assets/js/sim.js"></script>
+</body>
+</html>

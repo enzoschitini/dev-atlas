@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WebSocket | Integração entre sistemas · Dev Atlas</title>
+<script>
+  /* Define o tema antes de pintar a página, para não piscar. Mantenha em toda página. */
+  (function () {
+    var t = null;
+    try { t = localStorage.getItem('devmap-theme'); } catch (e) {}
+    if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    document.documentElement.dataset.theme = t;
+  })();
+</script>
+<link rel="stylesheet" href="../../../../assets/css/design-system.css">
+</head>
+<body data-root="../../../../" data-tab="arquitetura" data-page="integracao-entre-sistemas/tempo-real/websocket">
+<a class="skip" href="#main">Ir para o conteúdo</a>
+
+<header class="header" id="header" data-shell="header"></header>
+
+<div class="shell">
+  <aside class="side-wrap" id="side" aria-label="Páginas de Arquitetura e Algoritmos" data-shell="side"></aside>
+  <div class="main">
+    <div class="main-row">
+      <main class="article" id="main">
+        <header>
+          <div class="eyebrow">Arquitetura e Algoritmos / Integração entre sistemas / Tempo real e push</div>
+          <h1 class="page-title" tabindex="-1">WebSocket</h1>
+          <p class="lead">Uma conexão que fica aberta e permite que cliente e servidor enviem mensagens a qualquer momento.</p>
+        </header>
+
+        <div class="prose">
+          <h2 id="simulacao">Simulação</h2>
+          <p>Mexa nos controles e aperte os botões para ver o padrão funcionando, inclusive quando algo dá errado.</p>
+          <div data-sim="websocket" data-title="WebSocket" style="--gc: #2f8a5d"></div>
+
+          <h2 id="como-funciona">Como funciona</h2>
+          <p>Começa com um HTTP comum pedindo “upgrade”. Se o servidor aceita (101 Switching Protocols), a conexão vira um canal bidirecional persistente (full-duplex) sobre TCP, sem o custo de cabeçalhos a cada mensagem. É ideal para interações frequentes e de baixa latência. Exige cuidar de reconexão, heartbeats (ping/pong) e da escala, já que há muitas conexões abertas por servidor.</p>
+
+          <h2 id="passo-a-passo">Passo a passo</h2>
+          <ol>
+            <li>Cliente pede o upgrade via HTTP</li>
+            <li>Servidor responde 101 e a conexão vira WebSocket</li>
+            <li>Os dois lados enviam mensagens quando quiserem</li>
+            <li>Um dos lados fecha a conexão (ou ela cai e o cliente reconecta)</li>
+          </ol>
+
+          <h2 id="quando-usar">Quando usar</h2>
+          <ul>
+            <li>Baixa latência nos dois sentidos</li>
+            <li>Eliminar o overhead de requisições repetidas</li>
+            <li>Estado compartilhado em tempo real entre vários usuários</li>
+          </ul>
+
+          <h2 id="quando-evitar">Quando evitar</h2>
+          <ul>
+            <li>Quando só o servidor envia (SSE é mais simples)</li>
+            <li>Escalar na horizontal exige sticky sessions ou pub/sub entre servidores</li>
+            <li>Proxies e balanceadores precisam suportar upgrade e timeouts longos</li>
+          </ul>
+
+          <h2 id="exemplos">Exemplos</h2>
+          <ul>
+            <li>Chats e apps de mensagem na web</li>
+            <li>Jogos multiplayer e edição colaborativa</li>
+            <li>Cotações de corretoras e criptomoedas ao vivo</li>
+          </ul>
+
+          <h2 id="tecnologias">Tecnologias</h2>
+          <p><code>WebSocket API</code>, <code>Socket.IO</code>, <code>ws</code>, <code>SignalR</code>, <code>Phoenix Channels</code></p>
+        </div>
+
+        <nav class="pager" data-shell="pager" aria-label="Páginas vizinhas"></nav>
+      </main>
+      <aside class="toc" id="toc" data-toc aria-label="Nesta página"></aside>
+    </div>
+    <footer class="site-foot" data-shell="footer"></footer>
+  </div>
+</div>
+
+<div class="scrim"></div>
+<dialog class="search" id="search" data-shell="search" aria-label="Buscar no Dev Atlas"></dialog>
+
+<script src="../../../../assets/js/site.js"></script>
+<script src="../../../../assets/js/shell.js"></script>
+<script src="../../../../assets/js/ds.js"></script>
+<script src="../../../../assets/js/sim.js"></script>
+</body>
+</html>

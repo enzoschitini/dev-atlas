@@ -1,6 +1,6 @@
 ---
 name: explain-pattern
-description: Gera as duas páginas de um design pattern no DevMap — "Explicação" e "Uso" — no formato das páginas do Adapter, e registra as duas no mapa do site (assets/js/site.js). Recebe o nome do pattern e o grupo (criacionais, estruturais, comportamentais). Use sempre que o usuário pedir para documentar, criar páginas, escrever a explicação ou os exemplos de uso de um design pattern no site (Facade, Strategy, Observer, Factory Method, Decorator…), mesmo que ele não diga "skill" nem "explain-pattern".
+description: Gera as duas páginas de um design pattern no Dev Atlas — "Explicação" e "Uso" — no formato das páginas do Adapter, e registra as duas no mapa do site (assets/js/site.js). Recebe o nome do pattern e o grupo (criacionais, estruturais, comportamentais). Use sempre que o usuário pedir para documentar, criar páginas, escrever a explicação ou os exemplos de uso de um design pattern no site (Facade, Strategy, Observer, Factory Method, Decorator…), mesmo que ele não diga "skill" nem "explain-pattern".
 argument-hint: <pattern> <grupo>
 ---
 

@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Service mesh | Integração entre sistemas · Dev Atlas</title>
+<script>
+  /* Define o tema antes de pintar a página, para não piscar. Mantenha em toda página. */
+  (function () {
+    var t = null;
+    try { t = localStorage.getItem('devmap-theme'); } catch (e) {}
+    if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    document.documentElement.dataset.theme = t;
+  })();
+</script>
+<link rel="stylesheet" href="../../../../assets/css/design-system.css">
+</head>
+<body data-root="../../../../" data-tab="arquitetura" data-page="integracao-entre-sistemas/infra/mesh">
+<a class="skip" href="#main">Ir para o conteúdo</a>
+
+<header class="header" id="header" data-shell="header"></header>
+
+<div class="shell">
+  <aside class="side-wrap" id="side" aria-label="Páginas de Arquitetura e Algoritmos" data-shell="side"></aside>
+  <div class="main">
+    <div class="main-row">
+      <main class="article" id="main">
+        <header>
+          <div class="eyebrow">Arquitetura e Algoritmos / Integração entre sistemas / Infraestrutura de apoio</div>
+          <h1 class="page-title" tabindex="-1">Service mesh</h1>
+          <p class="lead">Proxies ao lado de cada serviço cuidam da comunicação interna (segurança, retentativas, métricas) sem mudar o código.</p>
+        </header>
+
+        <div class="prose">
+          <h2 id="simulacao">Simulação</h2>
+          <p>Mexa nos controles e aperte os botões para ver o padrão funcionando, inclusive quando algo dá errado.</p>
+          <div data-sim="mesh" data-title="Service mesh" style="--gc: #4d5560"></div>
+
+          <h2 id="como-funciona">Como funciona</h2>
+          <p>Cada instância ganha um proxy sidecar que intercepta todo o tráfego de entrada e saída. Um plano de controle distribui políticas e certificados para esses proxies. Assim, mTLS (criptografia e identidade entre serviços), retries, timeouts, circuit breakers, balanceamento e telemetria (métricas e traces) saem do código e viram configuração.</p>
+
+          <h2 id="passo-a-passo">Passo a passo</h2>
+          <ol>
+            <li>Um proxy sidecar é injetado ao lado de cada serviço</li>
+            <li>O serviço fala só com o proxy local</li>
+            <li>Os proxies conversam entre si com mTLS, retries e métricas</li>
+            <li>O plano de controle atualiza as políticas sem redeploy do app</li>
+          </ol>
+
+          <h2 id="quando-usar">Quando usar</h2>
+          <ul>
+            <li>Padronizar segurança e resiliência independentemente da linguagem</li>
+            <li>Visibilidade do tráfego: quem chama quem, latência, erros</li>
+            <li>Releases graduais por regras de tráfego (canary)</li>
+          </ul>
+
+          <h2 id="quando-evitar">Quando evitar</h2>
+          <ul>
+            <li>Overhead operacional e de recursos (um proxy por instância)</li>
+            <li>Curva de aprendizado alta; poucos serviços não justificam</li>
+            <li>Mais uma camada para depurar</li>
+          </ul>
+
+          <h2 id="exemplos">Exemplos</h2>
+          <ul>
+            <li>Clusters Kubernetes com dezenas ou centenas de microsserviços</li>
+            <li>Exigência de criptografia entre serviços (compliance)</li>
+            <li>Canary: 5% do tráfego para a versão nova</li>
+          </ul>
+
+          <h2 id="tecnologias">Tecnologias</h2>
+          <p><code>Istio</code>, <code>Linkerd</code>, <code>Consul Connect</code>, <code>Cilium</code>, <code>Envoy</code></p>
+        </div>
+
+        <nav class="pager" data-shell="pager" aria-label="Páginas vizinhas"></nav>
+      </main>
+      <aside class="toc" id="toc" data-toc aria-label="Nesta página"></aside>
+    </div>
+    <footer class="site-foot" data-shell="footer"></footer>
+  </div>
+</div>
+
+<div class="scrim"></div>
+<dialog class="search" id="search" data-shell="search" aria-label="Buscar no Dev Atlas"></dialog>
+
+<script src="../../../../assets/js/site.js"></script>
+<script src="../../../../assets/js/shell.js"></script>
+<script src="../../../../assets/js/ds.js"></script>
+<script src="../../../../assets/js/sim.js"></script>
+</body>
+</html>

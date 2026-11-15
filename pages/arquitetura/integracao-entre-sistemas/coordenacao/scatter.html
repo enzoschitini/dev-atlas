@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Scatter-gather | Integração entre sistemas · Dev Atlas</title>
+<script>
+  /* Define o tema antes de pintar a página, para não piscar. Mantenha em toda página. */
+  (function () {
+    var t = null;
+    try { t = localStorage.getItem('devmap-theme'); } catch (e) {}
+    if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    document.documentElement.dataset.theme = t;
+  })();
+</script>
+<link rel="stylesheet" href="../../../../assets/css/design-system.css">
+</head>
+<body data-root="../../../../" data-tab="arquitetura" data-page="integracao-entre-sistemas/coordenacao/scatter">
+<a class="skip" href="#main">Ir para o conteúdo</a>
+
+<header class="header" id="header" data-shell="header"></header>
+
+<div class="shell">
+  <aside class="side-wrap" id="side" aria-label="Páginas de Arquitetura e Algoritmos" data-shell="side"></aside>
+  <div class="main">
+    <div class="main-row">
+      <main class="article" id="main">
+        <header>
+          <div class="eyebrow">Arquitetura e Algoritmos / Integração entre sistemas / Coordenação e consistência</div>
+          <h1 class="page-title" tabindex="-1">Scatter-gather</h1>
+          <p class="lead">Um pedido é espalhado para vários serviços em paralelo e as respostas são combinadas numa só.</p>
+        </header>
+
+        <div class="prose">
+          <h2 id="simulacao">Simulação</h2>
+          <p>Mexa nos controles e aperte os botões para ver o padrão funcionando, inclusive quando algo dá errado.</p>
+          <div data-sim="scatter" data-title="Scatter-gather" style="--gc: #9a3f4f"></div>
+
+          <h2 id="como-funciona">Como funciona</h2>
+          <p>Um agregador recebe o pedido, o envia a N fornecedores ao mesmo tempo (chamadas paralelas ou mensagens), aguarda as respostas até um prazo (timeout) e então escolhe a melhor, junta tudo ou responde com o que chegou. A latência total é a do mais lento (ou a do timeout), não a soma de todos.</p>
+
+          <h2 id="passo-a-passo">Passo a passo</h2>
+          <ol>
+            <li>Agregador recebe o pedido</li>
+            <li>Dispara a mesma consulta a todos os fornecedores em paralelo</li>
+            <li>Aguarda as respostas até o timeout</li>
+            <li>Combina (ordena, escolhe a melhor, mescla) e responde</li>
+          </ol>
+
+          <h2 id="quando-usar">Quando usar</h2>
+          <ul>
+            <li>Reduzir latência paralelizando chamadas independentes</li>
+            <li>Comparar ofertas de várias fontes</li>
+            <li>Tolerar fornecedor lento respondendo com resultado parcial</li>
+          </ul>
+
+          <h2 id="quando-evitar">Quando evitar</h2>
+          <ul>
+            <li>Respostas parciais precisam ser aceitáveis para o negócio</li>
+            <li>Consome mais recursos (N chamadas por pedido) e pode sobrecarregar fornecedores</li>
+            <li>Defina timeout e circuit breaker por fornecedor</li>
+          </ul>
+
+          <h2 id="exemplos">Exemplos</h2>
+          <ul>
+            <li>Comparadores de passagens e preços consultando várias companhias</li>
+            <li>Busca distribuída: consulta todos os shards e mescla (Elasticsearch)</li>
+            <li>Leilões de anúncios coletando lances de várias partes</li>
+          </ul>
+
+          <h2 id="tecnologias">Tecnologias</h2>
+          <p><code>Apache Camel</code>, <code>Elasticsearch</code>, <code>Resilience4j</code>, <code>async/await</code>, <code>CompletableFuture</code></p>
+        </div>
+
+        <nav class="pager" data-shell="pager" aria-label="Páginas vizinhas"></nav>
+      </main>
+      <aside class="toc" id="toc" data-toc aria-label="Nesta página"></aside>
+    </div>
+    <footer class="site-foot" data-shell="footer"></footer>
+  </div>
+</div>
+
+<div class="scrim"></div>
+<dialog class="search" id="search" data-shell="search" aria-label="Buscar no Dev Atlas"></dialog>
+
+<script src="../../../../assets/js/site.js"></script>
+<script src="../../../../assets/js/shell.js"></script>
+<script src="../../../../assets/js/ds.js"></script>
+<script src="../../../../assets/js/sim.js"></script>
+</body>
+</html>
